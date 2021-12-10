@@ -44,11 +44,13 @@ dependencies {
     implementation 'com.amplifyframework:aws-api:1.30.0'
     implementation 'com.amplifyframework:aws-datastore:1.30.0'
     implementation 'com.amplifyframework:core:1.30.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.amplifyframework:aws-auth-cognito:1.30.0'
-
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.22'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
 
-
 }
+
 

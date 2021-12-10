@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.3altareeq">
         <activity
+
+            android:name=".RideDetails"
+
             android:name=".SplashGif"
             android:exported="true"
             android:screenOrientation="portrait" >
@@ -21,6 +24,7 @@
         </activity>
         <activity
             android:name=".ConfirmEmail"
+
             android:exported="false" />
         <activity
             android:name=".Register"
