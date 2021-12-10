@@ -23,9 +23,11 @@ public final class User implements Model {
   public static final QueryField ID = field("User", "id");
   public static final QueryField FIRST_NAME = field("User", "firstName");
   public static final QueryField LAST_NAME = field("User", "lastName");
+  public static final QueryField DB = field("User", "db");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String firstName;
-  private final @ModelField(targetType="String") String lastName;
+  private final @ModelField(targetType="String", isRequired = true) String lastName;
+  private final @ModelField(targetType="String", isRequired = true) String db;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -40,6 +42,10 @@ public final class User implements Model {
       return lastName;
   }
   
+  public String getDb() {
+      return db;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -48,10 +54,11 @@ public final class User implements Model {
       return updatedAt;
   }
   
-  private User(String id, String firstName, String lastName) {
+  private User(String id, String firstName, String lastName, String db) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
+    this.db = db;
   }
   
   @Override
@@ -65,6 +72,7 @@ public final class User implements Model {
       return ObjectsCompat.equals(getId(), user.getId()) &&
               ObjectsCompat.equals(getFirstName(), user.getFirstName()) &&
               ObjectsCompat.equals(getLastName(), user.getLastName()) &&
+              ObjectsCompat.equals(getDb(), user.getDb()) &&
               ObjectsCompat.equals(getCreatedAt(), user.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), user.getUpdatedAt());
       }
@@ -76,6 +84,7 @@ public final class User implements Model {
       .append(getId())
       .append(getFirstName())
       .append(getLastName())
+      .append(getDb())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -89,6 +98,7 @@ public final class User implements Model {
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("firstName=" + String.valueOf(getFirstName()) + ", ")
       .append("lastName=" + String.valueOf(getLastName()) + ", ")
+      .append("db=" + String.valueOf(getDb()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -111,6 +121,7 @@ public final class User implements Model {
     return new User(
       id,
       null,
+      null,
       null
     );
   }
@@ -118,24 +129,35 @@ public final class User implements Model {
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
       firstName,
-      lastName);
+      lastName,
+      db);
   }
   public interface FirstNameStep {
-    BuildStep firstName(String firstName);
+    LastNameStep firstName(String firstName);
+  }
+  
+
+  public interface LastNameStep {
+    DbStep lastName(String lastName);
+  }
+  
+
+  public interface DbStep {
+    BuildStep db(String db);
   }
   
 
   public interface BuildStep {
     User build();
     BuildStep id(String id);
-    BuildStep lastName(String lastName);
   }
   
 
-  public static class Builder implements FirstNameStep, BuildStep {
+  public static class Builder implements FirstNameStep, LastNameStep, DbStep, BuildStep {
     private String id;
     private String firstName;
     private String lastName;
+    private String db;
     @Override
      public User build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -143,19 +165,28 @@ public final class User implements Model {
         return new User(
           id,
           firstName,
-          lastName);
+          lastName,
+          db);
     }
     
     @Override
-     public BuildStep firstName(String firstName) {
+     public LastNameStep firstName(String firstName) {
         Objects.requireNonNull(firstName);
         this.firstName = firstName;
         return this;
     }
     
     @Override
-     public BuildStep lastName(String lastName) {
+     public DbStep lastName(String lastName) {
+        Objects.requireNonNull(lastName);
         this.lastName = lastName;
+        return this;
+    }
+    
+    @Override
+     public BuildStep db(String db) {
+        Objects.requireNonNull(db);
+        this.db = db;
         return this;
     }
     
@@ -171,10 +202,11 @@ public final class User implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String firstName, String lastName) {
+    private CopyOfBuilder(String id, String firstName, String lastName, String db) {
       super.id(id);
       super.firstName(firstName)
-        .lastName(lastName);
+        .lastName(lastName)
+        .db(db);
     }
     
     @Override
@@ -185,6 +217,11 @@ public final class User implements Model {
     @Override
      public CopyOfBuilder lastName(String lastName) {
       return (CopyOfBuilder) super.lastName(lastName);
+    }
+    
+    @Override
+     public CopyOfBuilder db(String db) {
+      return (CopyOfBuilder) super.db(db);
     }
   }
   
