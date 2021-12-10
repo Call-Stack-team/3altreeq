@@ -19,13 +19,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        try {
-            Amplify.addPlugin(new AWSCognitoAuthPlugin());
-            Amplify.configure(getApplicationContext());
-            Log.i("MyAmplifyApp", "Initialized Amplify");
-        } catch (AmplifyException error) {
-            Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
-        }
 
         Amplify.Auth.fetchAuthSession(
                 result -> Log.i("AmplifyQuickstart", result.toString()),
@@ -54,7 +47,10 @@ signOut.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         Amplify.Auth.signOut(
-                () -> Log.i("AuthQuickstart", "Signed out successfully"),
+                () -> {Log.i("AuthQuickstart", "Signed out successfully");
+                    Intent goToSignIn = new Intent(MainActivity.this, Login.class);
+                    startActivity(goToSignIn);
+                },
                 error -> Log.e("AuthQuickstart", error.toString())
         );
     }
