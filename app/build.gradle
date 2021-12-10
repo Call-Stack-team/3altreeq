@@ -44,6 +44,7 @@ dependencies {
     implementation 'com.amplifyframework:aws-api:1.30.0'
     implementation 'com.amplifyframework:aws-datastore:1.30.0'
     implementation 'com.amplifyframework:core:1.30.0'
+    implementation 'com.amplifyframework:aws-auth-cognito:1.30.0'
 
 //    //design
 //    compile fileTree(dir: 'libs', include: ['*.jar'])
