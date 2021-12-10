@@ -10,6 +10,11 @@
       "StackName": "amplify-3altreeq-tareeq-174842",
       "StackId": "arn:aws:cloudformation:us-east-1:720595577969:stack/amplify-3altreeq-tareeq-174842/8e4914c0-5907-11ec-ac61-0aee4b774141",
       "AmplifyAppId": "djkrdjrwuyxvm"
+    },
+    "categories": {
+      "auth": {
+        "3altreeq3e50e073": {}
+      }
     }
   }
 }

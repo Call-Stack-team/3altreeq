@@ -47,11 +47,10 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.amplifyframework:aws-auth-cognito:1.30.0'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.22'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
 
-//    //design
-//    compile fileTree(dir: 'libs', include: ['*.jar'])
-//    testCompile 'junit:junit:4.12'
-//    compile 'com.android.support:appcompat-v7:24.2.0'
-//    compile 'com.android.support:design:24.2.0'
-//    compile 'com.jakewharton:butterknife:7.0.1'
 }
+
+
