@@ -1,6 +1,11 @@
 type User @model {
   id: ID!
+  userName: String!
   firstName: String!
   lastName: String!
-  db:String!
+  email: String!
+  phoneNumber: String!
+  pictureKey:String
+  dateOfBirth:String
+  Gender: String
 }
