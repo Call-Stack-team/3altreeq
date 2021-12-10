@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
@@ -39,6 +40,30 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,Register.class));
             }
         });
+Button in=findViewById(R.id.button2);
+in.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(MainActivity.this,Login.class));
+    }
+});
+
+Button signOut=findViewById(R.id.signout);
+
+signOut.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Amplify.Auth.signOut(
+                () -> Log.i("AuthQuickstart", "Signed out successfully"),
+                error -> Log.e("AuthQuickstart", error.toString())
+        );
+    }
+});
 
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
 }
