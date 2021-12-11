@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amplifyframework.AmplifyException;
-import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+//import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.bumptech.glide.Glide;
 
@@ -31,14 +31,14 @@ public class SplashGif extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_gif);
 
-
-        try {
-            Amplify.addPlugin(new AWSCognitoAuthPlugin());
-            Amplify.configure(getApplicationContext());
-            Log.i("MyAmplifyApp", "Initialized Amplify");
-        } catch (AmplifyException error) {
-            Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
-        }
+//
+//        try {
+//            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+//            Amplify.configure(getApplicationContext());
+//            Log.i("MyAmplifyApp", "Initialized Amplify");
+//        } catch (AmplifyException error) {
+//            Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
+//        }
 
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -52,17 +52,22 @@ public class SplashGif extends AppCompatActivity {
 
         imageView.setAnimation(bottomAnim);
         app_name.setAnimation(topAnim);
+//        Intent goToFindeRidePage=new Intent(this,FindRide.class);
+//        startActivity(goToFindeRidePage);
+        Intent goTOfferRidePage=new Intent(this,OfferRide.class);
+        startActivity(goTOfferRidePage);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                Intent i = new Intent(SplashGif.this,Login.class);
+//                startActivity(i);
+//                finish();
+//
+//            }
+//        },DELAY_TIME);
 
-                Intent i = new Intent(SplashGif.this,Login.class);
-                startActivity(i);
-                finish();
-
-            }
-        },DELAY_TIME);
 
     }
 }

@@ -10,10 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.3altareeq">
         <activity
+            android:name=".OfferRide"
+            android:exported="false" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
+        <activity
+            android:name=".FindRide"
+            android:exported="false" />
+        <activity
             android:name=".SplashGif"
             android:exported="true"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,11 +34,9 @@
         </activity>
         <activity
             android:name=".ConfirmEmail"
-
             android:exported="false" />
         <activity
             android:name=".RideDetails"
-
             android:exported="false" />
         <activity
             android:name=".Register"
@@ -36,9 +46,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
