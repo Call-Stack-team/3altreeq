@@ -12,9 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.auth.AuthUserAttributeKey;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.User;
 
 public class Register extends AppCompatActivity {
 
@@ -29,7 +33,6 @@ public class Register extends AppCompatActivity {
         animationDrawable.setEnterFadeDuration(1500);
         animationDrawable.setExitFadeDuration(3000);
         animationDrawable.start();
-
 
         TextView goToSignIn=findViewById(R.id.gotosignin);
 
@@ -54,9 +57,10 @@ public class Register extends AppCompatActivity {
                         Intent goToConfirm = new Intent(Register.this, ConfirmEmail.class);
                         goToConfirm.putExtra("Name", username.getText().toString());
                         goToConfirm.putExtra("Email", email.getText().toString());
+                        goToConfirm.putExtra("firstName", firstName.getText().toString());
+                        goToConfirm.putExtra("lastName", lastName.getText().toString());
+                        goToConfirm.putExtra("phoneNumber", phoneNumber.getText().toString());
                         startActivity(goToConfirm);
-
-
                     },
                     error -> Log.e("AuthQuickStart", "Sign up failed", error)
             );

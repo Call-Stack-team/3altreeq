@@ -9,17 +9,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.User;
 
 public class ConfirmEmail extends AppCompatActivity {
+    private User user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_email);
+
         Button confirmCode=findViewById(R.id.confirmButton);
         EditText code=findViewById(R.id.code);
         String username = getIntent().getExtras().getString("Name");
+        String firstName = getIntent().getExtras().getString("firstName");
+        String lastName = getIntent().getExtras().getString("lastName");
+        String phoneNumber = getIntent().getExtras().getString("phoneNumber");
+        String email = getIntent().getExtras().getString("Email");
         confirmCode.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -28,7 +39,16 @@ public class ConfirmEmail extends AppCompatActivity {
                         username,
                         code.getText().toString(),
                         result -> {
-                            Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete");
+                            if(result.isSignUpComplete()){
+                                user= User.builder().userName(username).firstName(firstName).lastName(lastName).email(email).phoneNumber(phoneNumber).build();
+                                Amplify.API.mutate(
+                                        ModelMutation.create(user),
+                                        response -> Log.i("MyAmplifyApp", "Added Task with id: " + response.getData().getId()),
+                                        error -> Log.e("MyAmplifyApp", "Create failed", error)
+                                );
+                                System.out.println("siiiiiiigggn");
+                            }
+
                             Intent goToSignIn = new Intent(ConfirmEmail.this, Login.class);
                             startActivity(goToSignIn);
                         },
