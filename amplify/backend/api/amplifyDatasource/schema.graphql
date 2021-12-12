@@ -9,9 +9,10 @@ type Ride @model @auth(rules: [{allow: public}]) {
   lonDrop: Float!
   lonPick: Float!
   RideUsers: [RideUser] @connection(keyName: "byRide", fields: ["id"])
+  note: String
 }
 
-type User @model  @key(name: "userByUserName", fields: ["userName"], queryField: "userByUserName"){
+type User @model @key(name: "userByUserName", fields: ["userName"], queryField: "userByUserName") {
   id: ID!
   userName: String!
   firstName: String!

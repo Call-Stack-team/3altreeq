@@ -39,8 +39,9 @@ public class UserRides extends AppCompatActivity {
                 ModelQuery.list(User.class, User.USER_NAME.contains(Amplify.Auth.getCurrentUser().getUsername())),
                 response -> {
                     for (User u : response.getData()) {
-                        user=User.builder().userName(u.getUserName()).firstName(u.getFirstName()).lastName(u.getLastName()).email(u.getEmail()).phoneNumber(u.getPhoneNumber()).build();
+                        user=u;
                     }
+
                 },
                 error -> Log.e("MyAmplifyApp", "Query failure", error)
         );

@@ -35,6 +35,7 @@ public final class Ride implements Model {
   public static final QueryField LAT_PICK = field("Ride", "latPick");
   public static final QueryField LON_DROP = field("Ride", "lonDrop");
   public static final QueryField LON_PICK = field("Ride", "lonPick");
+  public static final QueryField NOTE = field("Ride", "note");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String driverName;
   private final @ModelField(targetType="String", isRequired = true) String dateTime;
@@ -45,6 +46,7 @@ public final class Ride implements Model {
   private final @ModelField(targetType="Float", isRequired = true) Double lonDrop;
   private final @ModelField(targetType="Float", isRequired = true) Double lonPick;
   private final @ModelField(targetType="RideUser") @HasMany(associatedWith = "ride", type = RideUser.class) List<RideUser> RideUsers = null;
+  private final @ModelField(targetType="String") String note;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -87,6 +89,10 @@ public final class Ride implements Model {
       return RideUsers;
   }
   
+  public String getNote() {
+      return note;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -95,7 +101,7 @@ public final class Ride implements Model {
       return updatedAt;
   }
   
-  private Ride(String id, String driverName, String dateTime, Integer numberOfSeats, String price, Double latDrop, Double latPick, Double lonDrop, Double lonPick) {
+  private Ride(String id, String driverName, String dateTime, Integer numberOfSeats, String price, Double latDrop, Double latPick, Double lonDrop, Double lonPick, String note) {
     this.id = id;
     this.driverName = driverName;
     this.dateTime = dateTime;
@@ -105,6 +111,7 @@ public final class Ride implements Model {
     this.latPick = latPick;
     this.lonDrop = lonDrop;
     this.lonPick = lonPick;
+    this.note = note;
   }
   
   @Override
@@ -124,6 +131,7 @@ public final class Ride implements Model {
               ObjectsCompat.equals(getLatPick(), ride.getLatPick()) &&
               ObjectsCompat.equals(getLonDrop(), ride.getLonDrop()) &&
               ObjectsCompat.equals(getLonPick(), ride.getLonPick()) &&
+              ObjectsCompat.equals(getNote(), ride.getNote()) &&
               ObjectsCompat.equals(getCreatedAt(), ride.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), ride.getUpdatedAt());
       }
@@ -141,6 +149,7 @@ public final class Ride implements Model {
       .append(getLatPick())
       .append(getLonDrop())
       .append(getLonPick())
+      .append(getNote())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -160,6 +169,7 @@ public final class Ride implements Model {
       .append("latPick=" + String.valueOf(getLatPick()) + ", ")
       .append("lonDrop=" + String.valueOf(getLonDrop()) + ", ")
       .append("lonPick=" + String.valueOf(getLonPick()) + ", ")
+      .append("note=" + String.valueOf(getNote()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -188,6 +198,7 @@ public final class Ride implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -201,7 +212,8 @@ public final class Ride implements Model {
       latDrop,
       latPick,
       lonDrop,
-      lonPick);
+      lonPick,
+      note);
   }
   public interface DriverNameStep {
     DateTimeStep driverName(String driverName);
@@ -246,6 +258,7 @@ public final class Ride implements Model {
   public interface BuildStep {
     Ride build();
     BuildStep id(String id);
+    BuildStep note(String note);
   }
   
 
@@ -259,6 +272,7 @@ public final class Ride implements Model {
     private Double latPick;
     private Double lonDrop;
     private Double lonPick;
+    private String note;
     @Override
      public Ride build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -272,7 +286,8 @@ public final class Ride implements Model {
           latDrop,
           latPick,
           lonDrop,
-          lonPick);
+          lonPick,
+          note);
     }
     
     @Override
@@ -331,6 +346,12 @@ public final class Ride implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep note(String note) {
+        this.note = note;
+        return this;
+    }
+    
     /** 
      * @param id id
      * @return Current Builder instance, for fluent method chaining
@@ -343,7 +364,7 @@ public final class Ride implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String driverName, String dateTime, Integer numberOfSeats, String price, Double latDrop, Double latPick, Double lonDrop, Double lonPick) {
+    private CopyOfBuilder(String id, String driverName, String dateTime, Integer numberOfSeats, String price, Double latDrop, Double latPick, Double lonDrop, Double lonPick, String note) {
       super.id(id);
       super.driverName(driverName)
         .dateTime(dateTime)
@@ -352,7 +373,8 @@ public final class Ride implements Model {
         .latDrop(latDrop)
         .latPick(latPick)
         .lonDrop(lonDrop)
-        .lonPick(lonPick);
+        .lonPick(lonPick)
+        .note(note);
     }
     
     @Override
@@ -393,6 +415,11 @@ public final class Ride implements Model {
     @Override
      public CopyOfBuilder lonPick(Double lonPick) {
       return (CopyOfBuilder) super.lonPick(lonPick);
+    }
+    
+    @Override
+     public CopyOfBuilder note(String note) {
+      return (CopyOfBuilder) super.note(note);
     }
   }
   
