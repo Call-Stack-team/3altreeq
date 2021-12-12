@@ -63,6 +63,13 @@ userRidesButton.setOnClickListener(new View.OnClickListener() {
         startActivity(new Intent(MainActivity.this,UserRides.class));
     }
 });
+Button rideLsit=findViewById(R.id.rideList);
+        rideLsit.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(MainActivity.this,RideList.class));
+    }
+});
     }
     @Override
     protected void onResume() {
