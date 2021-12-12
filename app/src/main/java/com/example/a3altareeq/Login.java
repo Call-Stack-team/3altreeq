@@ -22,12 +22,12 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ConstraintLayout layout = findViewById(R.id.layoutlogin);
-        AnimationDrawable animationDrawable = (AnimationDrawable)
-                layout.getBackground();
-        animationDrawable.setEnterFadeDuration(1500);
-        animationDrawable.setExitFadeDuration(3000);
-        animationDrawable.start();
+//        ConstraintLayout layout = findViewById(R.id.layoutlogin);
+//        AnimationDrawable animationDrawable = (AnimationDrawable)
+//                layout.getBackground();
+//        animationDrawable.setEnterFadeDuration(1500);
+//        animationDrawable.setExitFadeDuration(3000);
+//        animationDrawable.start();
 
 
         TextView goToSignUpPage=findViewById(R.id.goToSignUp);

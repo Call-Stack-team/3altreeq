@@ -26,13 +26,13 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        ConstraintLayout layout = findViewById(R.id.layout);
-        AnimationDrawable animationDrawable = (AnimationDrawable)
-                layout.getBackground();
-        animationDrawable.setEnterFadeDuration(1500);
-        animationDrawable.setExitFadeDuration(3000);
-        animationDrawable.start();
+//
+//        ConstraintLayout layout = findViewById(R.id.layout);
+//        AnimationDrawable animationDrawable = (AnimationDrawable)
+//                layout.getBackground();
+//        animationDrawable.setEnterFadeDuration(1500);
+//        animationDrawable.setExitFadeDuration(3000);
+//        animationDrawable.start();
 
         TextView goToSignIn=findViewById(R.id.gotosignin);
 

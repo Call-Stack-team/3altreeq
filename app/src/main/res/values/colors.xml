@@ -5,8 +5,6 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
     <color name="red">#FB0202</color>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
@@ -15,4 +13,20 @@
     <color name="colorGradientCenter">#d76d77</color>
     <color name="colorGradientEnd">#3a1c71</color>
     <color name="colorWhite">#FFFFFF</color>
+
+    //our color..
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black1">#0D0F12</color>
+    <color name="black2">#2A2E34</color>
+    <color name="black3">#3B3F46</color>
+    <color name="yellow1">#FF8C00</color>
+    <color name="yellow2">#F5B301</color>
+    <color name="yellow3">#FED053</color>
+
+
+
+
+
+
 </resources>

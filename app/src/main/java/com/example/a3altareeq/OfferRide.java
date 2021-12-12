@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -23,6 +24,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Ride;
+import com.amplifyframework.datastore.generated.model.RideUser;
+import com.amplifyframework.datastore.generated.model.User;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -47,6 +54,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class OfferRide extends FragmentActivity implements OnMapReadyCallback{
 
@@ -59,6 +67,7 @@ public class OfferRide extends FragmentActivity implements OnMapReadyCallback{
 //    private String offerDate;
 //    private String offerTime;
 //    private String offerNotes;
+    User user;
     ArrayList<LatLng> mMarkerPoints;
 
     @Override
@@ -148,25 +157,45 @@ public class OfferRide extends FragmentActivity implements OnMapReadyCallback{
                                 + "notes" + offerNotes.getText().toString() + "# Seats: " + seats.getText().toString()
                                 + "price: " + price.getText().toString()
                         , Toast.LENGTH_LONG).show();
-//                // save to dynamoDp
-//                Ride ride = Ride.builder()..build();
-//                Amplify.API.mutate(
-//                        ModelMutation.create(ride),
-//                        response -> {
-//                            Log.i("MyAmplifyApp", "Added user with id: " + response2.getData().getId());
-//                            Intent goOfferdList = new Intent(offerdList.this, OfferRide.class);
-//                            startActivity(goOfferdList);
-//                        },
-//                        error -> Log.e("MyAmplifyApp", "Create failed", error)
-//                );
-//                Log.i("AuthQuickStart", "Result: " + result.toString());
-//            }
-//        Intent goOfferedRidesListPage = new Intent(OfferRide.this, Offered.class);
-//                startActivity(goOfferedRidesListPage);
+
+//                // save to dynamoDp;
+
+                List<User>list=new ArrayList<>();
+                Amplify.API.query(
+                        ModelQuery.list(User.class),
+                        response -> {
+                            for (User userlist : response.getData()) {
+                               if(userlist.getUserName() == Amplify.Auth.getCurrentUser().getUsername()){
+                                   user = userlist;
+                               }
+                            }
+                        },
+                        error -> Log.e("MyAmplifyApp", "Query failure", error)
+                );
+
+                Ride ride = Ride.builder().driverName(Amplify.Auth.getCurrentUser().getUsername())
+                        .dateTime(datePickerFeild.getText().toString()+" , "+timePickerFeild.getText().toString())
+                .numberOfSeats(Integer.valueOf(seats.getText().toString())).price(price.getText().toString())
+                        .latDrop(mDestination.latitude).latPick(mOrigin.latitude)
+                        .lonDrop(mDestination.longitude).lonPick(mOrigin.longitude).note(offerNotes.getText().toString()).build();
+                RideUser rideUser=RideUser.builder().ride(ride).user(user).build();
+                ride.getRideUsers().add(rideUser);
+                Amplify.API.mutate(
+                        ModelMutation.create(ride),
+                        response -> {
+                            Log.i("MyAmplifyApp", "Added user with id: " + response.getData().getId());
+                            Intent goOfferdList = new Intent(OfferRide.this,RideList.class);
+                            startActivity(goOfferdList);
+                        },
+                        error -> Log.e("MyAmplifyApp", "Create failed", error)
+                );
+                Log.i("AuthQuickStart", "Result:  ");
             }
 
+
         });
-    }
+            }
+
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
