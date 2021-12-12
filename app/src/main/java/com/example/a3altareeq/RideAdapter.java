@@ -1,8 +1,10 @@
 package com.example.a3altareeq;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,6 +53,18 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
         from.setText(holder.ride.getLatDrop().toString());
         to.setText(holder.ride.getLatPick().toString());
         price.setText(holder.ride.getPrice());
+
+
+        Button button=holder.itemView.findViewById(R.id.request);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToRideDetails =new Intent(view.getContext(),RideDetails.class);
+                goToRideDetails.putExtra("rideId",holder.ride.getId());
+                view.getContext().startActivity(goToRideDetails);
+
+            }
+        });
 
 
     }

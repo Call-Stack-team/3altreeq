@@ -9,11 +9,14 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -133,18 +136,18 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
         findRide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("hello");
-//                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FindRide.this);
-//                SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
-//
-//                sharedPreferencesEditor.putLong("pickPointLat", (long) mOrigin.latitude);
-//                sharedPreferencesEditor.putLong("pickPointLon", (long) mOrigin.longitude);
-//                sharedPreferencesEditor.putLong("dropPointLat", (long) mDestination.latitude);
-//                sharedPreferencesEditor.putLong("dropPointLon", (long) mDestination.longitude);
 
-//                sharedPreferencesEditor.putString("date",datePickerFeild.getText().toString() );
-//                sharedPreferencesEditor.putString("time", timePickerField.getText().toString());
-//                sharedPreferencesEditor.apply();
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FindRide.this);
+                SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
+//
+                sharedPreferencesEditor.putLong("pickPointLat", (long) mOrigin.latitude);
+                sharedPreferencesEditor.putLong("pickPointLon", (long) mOrigin.longitude);
+                sharedPreferencesEditor.putLong("dropPointLat", (long) mDestination.latitude);
+                sharedPreferencesEditor.putLong("dropPointLon", (long) mDestination.longitude);
+
+                sharedPreferencesEditor.putString("date",datePickerFeild.getText().toString() );
+                sharedPreferencesEditor.putString("time", timePickerField.getText().toString());
+                sharedPreferencesEditor.apply();
                 Toast.makeText(getApplicationContext(), "( "+mOrigin.latitude +","+ mOrigin.longitude+" )"
                                 +"( "+mDestination.latitude +","+ mDestination.longitude+" )"
                                 +" date: "+datePickerFeild.getText().toString()+"time: "+timePickerField.getText().toString()
@@ -152,8 +155,8 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
                 System.out.println( ""+"( "+mOrigin.latitude +","+ mOrigin.longitude+" )"
                         +"( "+mDestination.latitude +","+ mDestination.longitude+" )"
                         +" date: "+datePickerFeild.getText().toString()+"time: "+timePickerField.getText().toString());
-//                Intent goRecyclerViewPage = new Intent(FindRide.this, Rides.class);
-//                startActivity(goRecyclerViewPage);
+                Intent goRecyclerViewPage = new Intent(FindRide.this, RideList.class);
+                startActivity(goRecyclerViewPage);
             }
 
         });
