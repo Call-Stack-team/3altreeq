@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bac"
+    android:layout_width="match_parent"
+    android:layout_height="200sp"
+    tools:context=".RideFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10sp"
+        android:background="@drawable/ridelayoutbackground"
+        android:clipToPadding="false">
+
+        <TextView
+            android:id="@+id/testFragmint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:text="Rider Name"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.105" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="101dp"
+            android:layout_height="87dp"
+            app:circularflow_radiusInDP="50sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.111"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="from"
+            android:textColor="#050000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.379"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.391" />
+
+        <TextView
+            android:id="@+id/to"
+            android:layout_width="35dp"
+            android:layout_height="18dp"
+            android:text="to"
+            android:textColor="#050000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.564"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.407" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="82dp"
+            android:layout_height="64dp"
+            android:text="price"
+            android:textColor="#050000"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.948"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.189"
+            tools:textAlignment="center" />
+
+        <Button
+            android:id="@+id/request"
+            android:layout_width="105dp"
+            android:layout_height="56dp"
+            android:text="Request"
+            android:textColor="#050000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="130dp"
+            android:layout_height="23dp"
+            android:text="phoneNumber"
+            android:textColor="#050000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.524"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.649" />
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:layout_width="389dp"-->
+        <!--            android:layout_height="197dp"-->
+        <!--            app:cardBackgroundColor="@color/white"-->
+        <!--            app:cardCornerRadius="20dp"-->
+        <!--            app:cardElevation="10dp"-->
+        <!--            app:cardMaxElevation="12dp"-->
+        <!--            app:cardPreventCornerOverlap="true"-->
+        <!--            app:cardUseCompatPadding="true"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.0"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintVertical_bias="0.005">-->
+
+        <!--            <ImageView-->
+        <!--                android:id="@+id/img"-->
+        <!--                android:layout_width="88dp"-->
+        <!--                android:layout_height="78dp"-->
+        <!--                android:layout_gravity="fill"-->
+        <!--                android:layout_margin="10dp"-->
+        <!--                android:contentDescription="@string/app_name"-->
+        <!--                android:src="@drawable/ic_baseline_directions_car_24" />-->
+
+        <!--            -->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/from"-->
+        <!--                android:layout_width="107dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center|center_horizontal"-->
+        <!--                android:layout_marginTop="20dp"-->
+        <!--                android:layout_marginBottom="20dp"-->
+        <!--                android:text="from"-->
+        <!--                android:textSize="20sp"-->
+        <!--                android:textStyle="italic" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/to"-->
+        <!--                android:layout_width="113dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="right|center"-->
+        <!--                android:layout_marginTop="20dp"-->
+        <!--                android:layout_marginBottom="20dp"-->
+        <!--                android:text="to"-->
+        <!--                android:textSize="20sp"-->
+        <!--                android:textStyle="italic" />-->
+
+
+        <!--        </androidx.cardview.widget.CardView>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
