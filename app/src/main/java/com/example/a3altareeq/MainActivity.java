@@ -63,11 +63,28 @@ userRidesButton.setOnClickListener(new View.OnClickListener() {
         startActivity(new Intent(MainActivity.this,UserRides.class));
     }
 });
+
 Button rideLsit=findViewById(R.id.rideList);
         rideLsit.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         startActivity(new Intent(MainActivity.this,RideList.class));
+    }
+});
+
+Button findRide=findViewById(R.id.findRide);
+        findRide.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(MainActivity.this,FindRide.class));
+    }
+});
+
+        Button offerRide=findViewById(R.id.offerRide);
+        offerRide.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(MainActivity.this,OfferRide.class));
     }
 });
     }

@@ -10,6 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.3altareeq">
         <activity
+            android:name=".OfferRide"
+            android:exported="true" />
+        <activity
+            android:name=".FindRide"
+            android:exported="true" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
             android:name=".UserRides"
             android:exported="true" />
         <activity
@@ -36,11 +51,12 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
         <activity
             android:name=".RideList"
             android:exported="false" />
