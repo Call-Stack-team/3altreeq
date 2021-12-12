@@ -3,17 +3,24 @@ package com.example.a3altareeq;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.User;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MainActivity extends AppCompatActivity {
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,7 @@ Button signOut=findViewById(R.id.signout);
 signOut.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
+
         Amplify.Auth.signOut(
                 () -> {Log.i("AuthQuickstart", "Signed out successfully");
                     Intent goToSignIn = new Intent(MainActivity.this, Login.class);
@@ -87,6 +95,49 @@ Button findRide=findViewById(R.id.findRide);
         startActivity(new Intent(MainActivity.this,OfferRide.class));
     }
 });
+        Button alert=findViewById(R.id.alert);
+        alert.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+
+//        new SweetAlertDialog(MainActivity.this)
+//                .setTitleText("Here's a message!")
+//                .show();
+        new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Are you sure?")
+                .setContentText("Won't be able to recover this file!")
+                .setConfirmText("Yes,delete it!")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog
+                                .setTitleText("Deleted!")
+                                .setContentText("Your imaginary file has been deleted!")
+                                .setConfirmText("OK")
+                                .setConfirmClickListener(null)
+                                .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                    }
+                })
+                .show();
+
+    }
+});
+
+/*------------------------send auth user id to user ride page--------------------------------- */
+        Amplify.API.query(
+                ModelQuery.list(User.class, User.USER_NAME.contains(Amplify.Auth.getCurrentUser().getUsername())),
+                response -> {
+                    for (User u : response.getData()) {
+                        user=u;
+                    }
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                    sharedPreferences.edit().putString("userId",user.getId()).apply();
+                },
+                error -> Log.e("MyAmplifyApp", "Query failure", error)
+        );
+
+        /*-----------------------------------------------------------------------------------------*/
+
     }
     @Override
     protected void onResume() {

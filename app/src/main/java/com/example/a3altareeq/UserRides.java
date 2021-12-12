@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
@@ -20,31 +22,29 @@ import com.amplifyframework.datastore.generated.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class UserRides extends AppCompatActivity {
      List<Ride> allUserRides = new ArrayList<>();
-     User user;
      RideUser ride;
+     User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_rides);
+
+
     }
 
     @Override
    protected void onResume() {
         super.onResume();
+        /* ------------------------------get auth user id from  main---------------*/
 
-        Amplify.API.query(
-                ModelQuery.list(User.class, User.USER_NAME.contains(Amplify.Auth.getCurrentUser().getUsername())),
-                response -> {
-                    for (User u : response.getData()) {
-                        user=u;
-                    }
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(UserRides.this);
+        String id=sharedPreferences.getString("userId","id");
 
-                },
-                error -> Log.e("MyAmplifyApp", "Query failure", error)
-        );
+/*---------------------get and provide user rides---------------------------------*/
 
         RecyclerView recyclerView = findViewById(R.id.allUserRides);
         Handler handler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
@@ -55,19 +55,28 @@ public class UserRides extends AppCompatActivity {
                 return false;
             }
         });
-        Amplify.API.query(
-                ModelQuery.list(Ride.class),
-                response -> {
-                    for (Ride ride : response.getData()) {
-                        allUserRides.add(ride);
+        Amplify.API.query(ModelQuery.get(User.class,id),
+                response ->{
+                    for (RideUser rideUser :response.getData().getRides()) {
+                        allUserRides.add(rideUser.getRide());
                     }
                     handler.sendEmptyMessage(1);
                 },
-                error -> Log.e("userRides", error.toString(), error)
+                error->Log.e("tareq",error.toString(),error)
         );
-
         recyclerView.setLayoutManager(new LinearLayoutManager(UserRides.this));
         recyclerView.setAdapter(new UserRidesAdapter(allUserRides));
 
+        /*---------------------------------------------------------------------------------*/
+/*
+        Amplify.API.query(ModelQuery.get(User.class,id),
+                response ->{
+
+                },
+                error->Log.e("tareq",error.toString(),error)
+        );
+        */
     }
+
+
 }

@@ -9,11 +9,14 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +26,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Ride;
+import com.amplifyframework.datastore.generated.model.RideUser;
+import com.amplifyframework.datastore.generated.model.User;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -149,6 +158,73 @@ public class OfferRide extends FragmentActivity implements OnMapReadyCallback{
                                 + "price: " + price.getText().toString()
                         , Toast.LENGTH_LONG).show();
 //                // save to dynamoDp
+
+
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(OfferRide.this);
+                String id=sharedPreferences.getString("userId","id");
+
+                Ride ride = Ride.builder().driverName(Amplify.Auth.getCurrentUser().getUsername())
+                        .dateTime(datePickerFeild.getText().toString() + " , " + timePickerFeild.getText().toString())
+                        .numberOfSeats(Integer.valueOf(seats.getText().toString())).price(price.getText().toString())
+                        .latDrop(mDestination.latitude).latPick(mOrigin.latitude)
+                        .lonDrop(mDestination.longitude).lonPick(mOrigin.longitude).note(offerNotes.getText().toString()).build();
+
+
+
+                List<User> list = new ArrayList<>();
+                Amplify.API.query(
+                        ModelQuery.get(User.class,id), response->{
+
+                            Log.i("MyAmplifyApp", "Added user with id: " + response.getData().getId());
+                                /*---------------*/
+
+                            Amplify.API.mutate(
+                                    ModelMutation.create(ride),
+                                    responseRide -> {
+                                        RideUser rideUser = RideUser.builder().ride(responseRide.getData()).user(response.getData()).build();
+                                        Amplify.API.mutate(ModelMutation.create(rideUser),
+                                                responseRiderUser-> Log.i("MyAmplifyApp", "Added user with id: " + responseRiderUser.getData().getId()),
+                                                error -> Log.e("MyAmplifyApp", "Create failed", error)
+
+                                                );
+
+
+                                        Log.i("MyAmplifyApp", "Added user with id: " + response.getData().getId());
+                                        Intent goOfferdList = new Intent(OfferRide.this, RideList.class);
+                                        startActivity(goOfferdList);
+                                    },
+                                    error -> Log.e("MyAmplifyApp", "Create failed", error)
+                            );
+                            /*----------------------------------------------------------*/
+//                            response.getData().getRides().add(rideUser);
+                        },error -> Log.e("MyAmplifyApp", "Create failed", error));
+
+
+
+//                                list(User.class),
+//                        response -> {
+//                            for (User userlist : response.getData()) {
+//                                if (userlist.getUserName() == Amplify.Auth.getCurrentUser().getUsername()) {
+//                                    user = userlist;
+//                                }
+//                            }
+
+//                            RideUser rideUser = RideUser.builder().ride(ride).user(user).build();
+//                            ride.getRideUsers().add(rideUser);
+//                        },
+//                        error -> Log.e("MyAmplifyApp", "Query failure", error)
+//                );
+
+
+
+
+                Log.i("AuthQuickStart", "Result:  ");
+            }
+        });
+
+
+
+
 //                Ride ride = Ride.builder()..build();
 //                Amplify.API.mutate(
 //                        ModelMutation.create(ride),
@@ -163,9 +239,9 @@ public class OfferRide extends FragmentActivity implements OnMapReadyCallback{
 //            }
 //        Intent goOfferedRidesListPage = new Intent(OfferRide.this, Offered.class);
 //                startActivity(goOfferedRidesListPage);
-            }
-
-        });
+//            }
+//
+//        });
     }
 
     @Override
