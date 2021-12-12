@@ -26,7 +26,7 @@ public class SplashGif extends AppCompatActivity {
     private static int DELAY_TIME = 6000;
 
     Animation topAnim, bottomAnim;
-    TextView app_name;
+    ImageView app_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +50,10 @@ public class SplashGif extends AppCompatActivity {
 
         ImageView imageView = findViewById(R.id.img);
         Glide.with(this).load(R.drawable.cargif).into(imageView);
-        app_name = findViewById(R.id.appname);
+//        app_name = findViewById(R.id.appname);
 
         imageView.setAnimation(bottomAnim);
-        app_name.setAnimation(topAnim);
+//        app_name.setAnimation(topAnim);
 
         new Handler().postDelayed(new Runnable() {
             @Override
