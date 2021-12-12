@@ -36,4 +36,6 @@ amplifytools.xcconfig
 **.sample
 #amplify-do-not-edit-end
 
+src/main/res/values/google_maps_api.xml
+
 

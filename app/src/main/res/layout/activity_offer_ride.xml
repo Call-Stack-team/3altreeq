@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <fragment
+        android:id="@+id/mapOffer"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        tools:context=".OfferRide" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/enterDropPointOffer"
+            android:layout_width="177dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Drop Point"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.634"
+            map:layout_constraintStart_toEndOf="@+id/enterPickUpPointOffer"
+            map:layout_constraintTop_toTopOf="parent"
+            map:layout_constraintVertical_bias="0.418" />
+
+        <!-- red color for the background of the date picker -->
+
+        <TextView
+            android:id="@+id/enterPickUpPointOffer"
+            android:layout_width="177dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Pick Point"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.068"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent"
+            map:layout_constraintVertical_bias="0.416" />
+
+        <EditText
+            android:id="@+id/editRideDateOffer"
+            android:layout_width="177dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:ems="10"
+            android:inputType="date"
+            android:text="choose Date"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toStartOf="@+id/editRideTimeOffer"
+            map:layout_constraintHorizontal_bias="0.0"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent"
+            map:layout_constraintVertical_bias="0.512" />
+
+        <EditText
+            android:id="@+id/editRideTimeOffer"
+            android:layout_width="177dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="time"
+            android:text="choose Time"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.935"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toBottomOf="@+id/enterDropPointOffer"
+            map:layout_constraintVertical_bias="0.059" />
+
+        <Button
+            android:id="@+id/offerRideButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Offer Ride"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.439"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent"
+            map:layout_constraintVertical_bias="0.955" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="366dp"
+            android:layout_height="117dp"
+            android:orientation="horizontal"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.355"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent"
+            map:layout_constraintVertical_bias="0.8" >
+
+            <EditText
+                android:id="@+id/editRideNotes"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Ride Notes" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editSeatsNumber"
+            android:layout_width="177dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="248dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="# Seats"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.068"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toBottomOf="@+id/editRideDateOffer"
+            map:layout_constraintVertical_bias="0.866" />
+
+        <EditText
+            android:id="@+id/editPriceOffered"
+            android:layout_width="177dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Price"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.609"
+            map:layout_constraintStart_toEndOf="@+id/editSeatsNumber"
+            map:layout_constraintTop_toTopOf="parent"
+            map:layout_constraintVertical_bias="0.596" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
