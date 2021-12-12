@@ -11,7 +11,7 @@ type Ride @model @auth(rules: [{allow: public}]) {
   RideUsers: [RideUser] @connection(keyName: "byRide", fields: ["id"])
 }
 
-type User @model {
+type User @model  @key(name: "userByUserName", fields: ["userName"], queryField: "userByUserName"){
   id: ID!
   userName: String!
   firstName: String!

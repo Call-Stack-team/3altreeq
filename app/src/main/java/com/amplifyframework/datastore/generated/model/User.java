@@ -20,6 +20,7 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the User type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "Users")
+@Index(name = "userByUserName", fields = {"userName"})
 public final class User implements Model {
   public static final QueryField ID = field("User", "id");
   public static final QueryField USER_NAME = field("User", "userName");
