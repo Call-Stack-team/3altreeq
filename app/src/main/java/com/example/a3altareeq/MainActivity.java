@@ -56,6 +56,13 @@ signOut.setOnClickListener(new View.OnClickListener() {
     }
 });
 
+Button userRidesButton=findViewById(R.id.userRideButtonMain);
+userRidesButton.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(MainActivity.this,UserRides.class));
+    }
+});
     }
     @Override
     protected void onResume() {
