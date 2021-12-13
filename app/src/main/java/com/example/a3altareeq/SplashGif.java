@@ -59,9 +59,22 @@ public class SplashGif extends AppCompatActivity {
             @Override
             public void run() {
 
-                Intent i = new Intent(SplashGif.this,Login.class);
-                startActivity(i);
-                finish();
+                Amplify.Auth.fetchAuthSession(
+                        result ->{
+                            if(result.isSignedIn()){
+                                Intent main = new Intent(SplashGif.this,MainActivity.class);
+                                startActivity(main);
+                                finish();
+                            }else{
+                                Intent i = new Intent(SplashGif.this,Login.class);
+                                startActivity(i);
+                                finish();
+
+                            }
+                        },
+                        error -> Log.e("AmplifyQuickstart", error.toString())
+                );
+
 
             }
         },DELAY_TIME);
