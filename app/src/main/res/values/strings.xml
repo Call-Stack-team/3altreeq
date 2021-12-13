@@ -11,4 +11,18 @@
     <string name="login_failed">"Login failed"</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_1">sign up</string>
+    <string name="title_2">sign in</string>
+    <string name="title_3">sign out</string>
+    <string name="title_4">user ride</string>
+    <string name="title_5">ride list</string>
+    <string name="title_6">find Ride</string>
+    <string name="title_7">offer ride</string>
+    <string name="title_8">alert</string>
+
+
+    <string name="header_title">3altareeq</string>
+    <string name="header_text">3altareeq</string>
+    <string name="top_app_bar">3altareeq</string>
+
 </resources>
