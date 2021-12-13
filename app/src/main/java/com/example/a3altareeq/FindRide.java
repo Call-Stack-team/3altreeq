@@ -119,9 +119,11 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
+
                         String timeFormat = simpleDateFormat.format(mcurrentTime.getTime());
                         Time=timeFormat;
                         timePickerField.setText(timeFormat);
+                        timePickerField.setText(selectedHour+ ":" + selectedMinute);
                     }
                 }, hour, minute, false);//Is 24 hour time
                 mTimePicker.setTitle("Select Time");
@@ -140,10 +142,10 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FindRide.this);
                 SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
 //
-                sharedPreferencesEditor.putLong("pickPointLat", (long) mOrigin.latitude);
-                sharedPreferencesEditor.putLong("pickPointLon", (long) mOrigin.longitude);
-                sharedPreferencesEditor.putLong("dropPointLat", (long) mDestination.latitude);
-                sharedPreferencesEditor.putLong("dropPointLon", (long) mDestination.longitude);
+                sharedPreferencesEditor.putFloat("pickPointLat",(float)  mOrigin.latitude);
+                sharedPreferencesEditor.putFloat("pickPointLon", (float) mOrigin.longitude);
+                sharedPreferencesEditor.putFloat("dropPointLat", (float) mDestination.latitude);
+                sharedPreferencesEditor.putFloat("dropPointLon", (float) mDestination.longitude);
 
                 sharedPreferencesEditor.putString("date",datePickerFeild.getText().toString() );
                 sharedPreferencesEditor.putString("time", timePickerField.getText().toString());
