@@ -6,12 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".UserRides">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bookUser_btn"
+        android:layout_width="206dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/gradientselected"
+        android:text="Booked"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/offered_btn"
+        android:layout_width="206dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/gradientselect"
+        android:text="offered"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.991"
+        app:layout_constraintStart_toEndOf="@+id/bookUser_btn"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/allUserRides"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_width="407dp"
+        android:layout_height="531dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.496"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,54 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="170dp"
     tools:context=".UserRidesFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="126dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="5dp"
-        app:cardMaxElevation="5dp"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true">
+        android:layout_height="160dp"
+        android:layout_margin="5dp"
+        android:background="#FFFFB7"
+        android:clipToPadding="false">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/taskCon"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteY="4dp">
+            android:layout_height="160dp"
+            android:background="@color/white">
 
+            <ImageView
+                android:id="@+id/circleImageView"
+                android:layout_width="44dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/captenblack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.044"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/dot"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="88dp"
+                android:src="@drawable/dot"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.02"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/driverNameInUserRidesFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="76dp"
                 android:text="Driver name"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.125"
+                tools:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dropInUserRidesFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Drop Location"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/dot"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.884"
+                tools:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/pickInUserRidesFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pick Location"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/dot"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.637"
+                tools:textStyle="bold" />
 
             <TextView
                 android:id="@+id/timeinUserRidesFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="16dp"
-                android:text="Time"
-                app:layout_constraintStart_toEndOf="@+id/driverNameInUserRidesFragment"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginEnd="16dp"
+                android:text="Date Time"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.917"
+                tools:textStyle="bold" />
 
             <TextView
                 android:id="@+id/priceInUserRidesFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Price"
-                tools:layout_editor_absoluteX="244dp"
-                tools:layout_editor_absoluteY="19dp" />
+                android:layout_width="77dp"
+                android:layout_height="29dp"
+                android:text="Cost"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.122"
+                tools:textStyle="bold" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </FrameLayout>
