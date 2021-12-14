@@ -58,21 +58,20 @@
 
     <TextView
         android:id="@+id/goToSignUp"
-        android:layout_width="255dp"
-        android:layout_height="29dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:fontFamily="monospace"
+        android:linksClickable="true"
         android:text="Create account?"
         android:textColor="@color/black1"
-        android:linksClickable="true"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.971"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton"
         tools:fontFamily="sans-serif"
-        tools:textAlignment="center"
-        />
+        tools:textAlignment="center" />
 
     <EditText
         android:id="@+id/passwordlogin"
@@ -112,13 +111,12 @@
         android:id="@+id/imageView3"
         android:layout_width="160dp"
         android:layout_height="56dp"
-        android:layout_marginTop="0dp"
+        android:outlineSpotShadowColor="@color/black1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:srcCompat="@drawable/logoname"
 
-        android:outlineSpotShadowColor="@color/black1"/>
+        app:srcCompat="@drawable/logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

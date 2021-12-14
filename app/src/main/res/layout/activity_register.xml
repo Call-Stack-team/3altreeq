@@ -14,14 +14,13 @@
         android:id="@+id/imageView5"
         android:layout_width="160dp"
         android:layout_height="56dp"
-        android:layout_marginTop="0dp"
         android:outlineSpotShadowColor="@color/black1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
 
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:srcCompat="@drawable/logoname" />
+        app:srcCompat="@drawable/logo" />
 
     <EditText
         android:id="@+id/username"
@@ -105,15 +104,14 @@
 
     <TextView
         android:id="@+id/gotosignin"
-        android:layout_width="255dp"
-        android:layout_height="29dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
 
         android:text="Already has account?"
         android:textColor="@color/black1"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.884"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerButton"
         tools:fontFamily="sans-serif"

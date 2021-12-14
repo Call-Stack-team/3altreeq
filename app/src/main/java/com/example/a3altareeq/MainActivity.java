@@ -247,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Address loc = address.get(0);
                 Log.e(TAG, loc.getLatitude() + " " + loc.getLongitude());
                 LatLng pos = new LatLng(loc.getLatitude(), loc.getLongitude());
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 8));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 6));
             }
         } catch (IOException e) {
             e.printStackTrace();
