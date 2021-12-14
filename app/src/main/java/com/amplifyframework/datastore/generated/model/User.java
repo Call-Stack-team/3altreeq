@@ -31,6 +31,10 @@ public final class User implements Model {
   public static final QueryField PICTURE_KEY = field("User", "pictureKey");
   public static final QueryField DATE_OF_BIRTH = field("User", "dateOfBirth");
   public static final QueryField GENDER = field("User", "Gender");
+  public static final QueryField PICKUP_USERLON = field("User", "pickupUserlon");
+  public static final QueryField PICKUP_USERLAT = field("User", "pickupUserlat");
+  public static final QueryField DROP_USERLON = field("User", "dropUserlon");
+  public static final QueryField DROP_USERLAT = field("User", "dropUserlat");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String userName;
   private final @ModelField(targetType="String", isRequired = true) String firstName;
@@ -41,6 +45,10 @@ public final class User implements Model {
   private final @ModelField(targetType="String") String dateOfBirth;
   private final @ModelField(targetType="String") String Gender;
   private final @ModelField(targetType="RideUser") @HasMany(associatedWith = "user", type = RideUser.class) List<RideUser> rides = null;
+  private final @ModelField(targetType="Float") Double pickupUserlon;
+  private final @ModelField(targetType="Float") Double pickupUserlat;
+  private final @ModelField(targetType="Float") Double dropUserlon;
+  private final @ModelField(targetType="Float") Double dropUserlat;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -83,6 +91,22 @@ public final class User implements Model {
       return rides;
   }
   
+  public Double getPickupUserlon() {
+      return pickupUserlon;
+  }
+  
+  public Double getPickupUserlat() {
+      return pickupUserlat;
+  }
+  
+  public Double getDropUserlon() {
+      return dropUserlon;
+  }
+  
+  public Double getDropUserlat() {
+      return dropUserlat;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -91,7 +115,7 @@ public final class User implements Model {
       return updatedAt;
   }
   
-  private User(String id, String userName, String firstName, String lastName, String email, String phoneNumber, String pictureKey, String dateOfBirth, String Gender) {
+  private User(String id, String userName, String firstName, String lastName, String email, String phoneNumber, String pictureKey, String dateOfBirth, String Gender, Double pickupUserlon, Double pickupUserlat, Double dropUserlon, Double dropUserlat) {
     this.id = id;
     this.userName = userName;
     this.firstName = firstName;
@@ -101,6 +125,10 @@ public final class User implements Model {
     this.pictureKey = pictureKey;
     this.dateOfBirth = dateOfBirth;
     this.Gender = Gender;
+    this.pickupUserlon = pickupUserlon;
+    this.pickupUserlat = pickupUserlat;
+    this.dropUserlon = dropUserlon;
+    this.dropUserlat = dropUserlat;
   }
   
   @Override
@@ -120,6 +148,10 @@ public final class User implements Model {
               ObjectsCompat.equals(getPictureKey(), user.getPictureKey()) &&
               ObjectsCompat.equals(getDateOfBirth(), user.getDateOfBirth()) &&
               ObjectsCompat.equals(getGender(), user.getGender()) &&
+              ObjectsCompat.equals(getPickupUserlon(), user.getPickupUserlon()) &&
+              ObjectsCompat.equals(getPickupUserlat(), user.getPickupUserlat()) &&
+              ObjectsCompat.equals(getDropUserlon(), user.getDropUserlon()) &&
+              ObjectsCompat.equals(getDropUserlat(), user.getDropUserlat()) &&
               ObjectsCompat.equals(getCreatedAt(), user.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), user.getUpdatedAt());
       }
@@ -137,6 +169,10 @@ public final class User implements Model {
       .append(getPictureKey())
       .append(getDateOfBirth())
       .append(getGender())
+      .append(getPickupUserlon())
+      .append(getPickupUserlat())
+      .append(getDropUserlon())
+      .append(getDropUserlat())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -156,6 +192,10 @@ public final class User implements Model {
       .append("pictureKey=" + String.valueOf(getPictureKey()) + ", ")
       .append("dateOfBirth=" + String.valueOf(getDateOfBirth()) + ", ")
       .append("Gender=" + String.valueOf(getGender()) + ", ")
+      .append("pickupUserlon=" + String.valueOf(getPickupUserlon()) + ", ")
+      .append("pickupUserlat=" + String.valueOf(getPickupUserlat()) + ", ")
+      .append("dropUserlon=" + String.valueOf(getDropUserlon()) + ", ")
+      .append("dropUserlat=" + String.valueOf(getDropUserlat()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -184,6 +224,10 @@ public final class User implements Model {
       null,
       null,
       null,
+      null,
+      null,
+      null,
+      null,
       null
     );
   }
@@ -197,7 +241,11 @@ public final class User implements Model {
       phoneNumber,
       pictureKey,
       dateOfBirth,
-      Gender);
+      Gender,
+      pickupUserlon,
+      pickupUserlat,
+      dropUserlon,
+      dropUserlat);
   }
   public interface UserNameStep {
     FirstNameStep userName(String userName);
@@ -230,6 +278,10 @@ public final class User implements Model {
     BuildStep pictureKey(String pictureKey);
     BuildStep dateOfBirth(String dateOfBirth);
     BuildStep gender(String gender);
+    BuildStep pickupUserlon(Double pickupUserlon);
+    BuildStep pickupUserlat(Double pickupUserlat);
+    BuildStep dropUserlon(Double dropUserlon);
+    BuildStep dropUserlat(Double dropUserlat);
   }
   
 
@@ -243,6 +295,10 @@ public final class User implements Model {
     private String pictureKey;
     private String dateOfBirth;
     private String Gender;
+    private Double pickupUserlon;
+    private Double pickupUserlat;
+    private Double dropUserlon;
+    private Double dropUserlat;
     @Override
      public User build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -256,7 +312,11 @@ public final class User implements Model {
           phoneNumber,
           pictureKey,
           dateOfBirth,
-          Gender);
+          Gender,
+          pickupUserlon,
+          pickupUserlat,
+          dropUserlon,
+          dropUserlat);
     }
     
     @Override
@@ -312,6 +372,30 @@ public final class User implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep pickupUserlon(Double pickupUserlon) {
+        this.pickupUserlon = pickupUserlon;
+        return this;
+    }
+    
+    @Override
+     public BuildStep pickupUserlat(Double pickupUserlat) {
+        this.pickupUserlat = pickupUserlat;
+        return this;
+    }
+    
+    @Override
+     public BuildStep dropUserlon(Double dropUserlon) {
+        this.dropUserlon = dropUserlon;
+        return this;
+    }
+    
+    @Override
+     public BuildStep dropUserlat(Double dropUserlat) {
+        this.dropUserlat = dropUserlat;
+        return this;
+    }
+    
     /** 
      * @param id id
      * @return Current Builder instance, for fluent method chaining
@@ -324,7 +408,7 @@ public final class User implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String userName, String firstName, String lastName, String email, String phoneNumber, String pictureKey, String dateOfBirth, String gender) {
+    private CopyOfBuilder(String id, String userName, String firstName, String lastName, String email, String phoneNumber, String pictureKey, String dateOfBirth, String gender, Double pickupUserlon, Double pickupUserlat, Double dropUserlon, Double dropUserlat) {
       super.id(id);
       super.userName(userName)
         .firstName(firstName)
@@ -333,7 +417,11 @@ public final class User implements Model {
         .phoneNumber(phoneNumber)
         .pictureKey(pictureKey)
         .dateOfBirth(dateOfBirth)
-        .gender(gender);
+        .gender(gender)
+        .pickupUserlon(pickupUserlon)
+        .pickupUserlat(pickupUserlat)
+        .dropUserlon(dropUserlon)
+        .dropUserlat(dropUserlat);
     }
     
     @Override
@@ -374,6 +462,26 @@ public final class User implements Model {
     @Override
      public CopyOfBuilder gender(String gender) {
       return (CopyOfBuilder) super.gender(gender);
+    }
+    
+    @Override
+     public CopyOfBuilder pickupUserlon(Double pickupUserlon) {
+      return (CopyOfBuilder) super.pickupUserlon(pickupUserlon);
+    }
+    
+    @Override
+     public CopyOfBuilder pickupUserlat(Double pickupUserlat) {
+      return (CopyOfBuilder) super.pickupUserlat(pickupUserlat);
+    }
+    
+    @Override
+     public CopyOfBuilder dropUserlon(Double dropUserlon) {
+      return (CopyOfBuilder) super.dropUserlon(dropUserlon);
+    }
+    
+    @Override
+     public CopyOfBuilder dropUserlat(Double dropUserlat) {
+      return (CopyOfBuilder) super.dropUserlat(dropUserlat);
     }
   }
   
