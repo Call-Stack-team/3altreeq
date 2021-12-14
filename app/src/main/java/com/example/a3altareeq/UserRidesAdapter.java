@@ -18,6 +18,7 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Ride;
 import com.amplifyframework.datastore.generated.model.RideUser;
 import com.amplifyframework.datastore.generated.model.User;
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -75,14 +76,11 @@ public class UserRidesAdapter extends RecyclerView.Adapter<UserRidesAdapter.User
         viewPassenger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                new SweetAlertDialog(holder.itemView.getContext(), SweetAlertDialog.CUSTOM_IMAGE_TYPE)
-                        .setTitleText("Passengers")
-                        .setContentText(
-                                passengers.toString()
-                        )
-                        .show();
+                Intent goToPassengerActivity=new Intent(holder.itemView.getContext(),Passengers.class);
+                goToPassengerActivity.putExtra("offerRideId",holder.ride.getId());
+                view.getContext().startActivity(goToPassengerActivity);
             }
+
         });
     }
 

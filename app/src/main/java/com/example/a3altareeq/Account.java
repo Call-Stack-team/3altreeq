@@ -2,6 +2,8 @@ package com.example.a3altareeq;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,13 +12,17 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.model.query.Where;
 import com.amplifyframework.datastore.generated.model.User;
+
+import java.util.Calendar;
 
 public class Account extends AppCompatActivity {
    private User user;
@@ -39,8 +45,8 @@ public class Account extends AppCompatActivity {
         EditText newLastName=findViewById(R.id.newLastName);
         EditText NewPhoneNumber=findViewById(R.id.newPhoneNumber);
         EditText newGender=findViewById(R.id.newGender);
-        EditText newDateOfBrith=findViewById(R.id.newDateOfBrith);
-        EditText newImage=findViewById(R.id.newImage);
+        TextView newDateOfBrith=findViewById(R.id.newDateOfBrith);
+//        EditText newImage=findViewById(R.id.newImage);
 
 
         Amplify.API.query(
@@ -54,13 +60,13 @@ public class Account extends AppCompatActivity {
                     new Handler(Looper.getMainLooper()).post(new Runnable(){
                         @Override
                         public void run() {
-                            newUserName.setText(user.getUserName());
+                            newUserName.setText("@"+user.getUserName());
                             newFirstName.setText(user.getFirstName());
                             newLastName.setText(user.getLastName());
                             NewPhoneNumber.setText(user.getPhoneNumber());
                             newGender.setText(user.getGender());
                             newDateOfBrith.setText(user.getDateOfBirth());
-                            newImage.setText(user.getPictureKey());
+//                            newImage.setText(user.getPictureKey());
                         }
                     });
                 },
@@ -71,6 +77,7 @@ public class Account extends AppCompatActivity {
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_LONG).show();
                 System.out.println("userId: ********************" + userId);
                 Amplify.DataStore.query(User.class, Where.id(userId),
                         matches -> {
@@ -83,7 +90,7 @@ public class Account extends AppCompatActivity {
                                         .phoneNumber(NewPhoneNumber.getText().toString())
                                         .gender(newGender.getText().toString())
                                         .dateOfBirth(newDateOfBrith.getText().toString())
-                                        .pictureKey(newImage.getText().toString())
+//                                        .pictureKey(newImage.getText().toString())
                                         .build();
                                 Amplify.DataStore.save(edited,
                                         updated -> Log.i("MyAmplifyApp", "Updated a User."),
@@ -93,6 +100,36 @@ public class Account extends AppCompatActivity {
                         },
                         failure -> Log.e("MyAmplifyApp", "Query failed.", failure)
                 );
+                startActivity(new Intent(Account.this,AccountShow.class));
+            }
+        });
+
+        ////////////////////////Input by User///////////////////
+
+        //Date Picker
+        TextView dateOfBrith=findViewById(R.id.newDateOfBrith);
+        dateOfBrith.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // calender class's instance and get current date , month and year from calender
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR); // current year
+                int mMonth = c.get(Calendar.MONTH); // current month
+                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                // date picker dialog
+                DatePickerDialog datePickerDialog  = new DatePickerDialog(Account.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // set day of month , month and year value in the edit text
+                                dateOfBrith.setText(dayOfMonth + "/"
+                                        + (monthOfYear + 1) + "/" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
             }
         });
     }

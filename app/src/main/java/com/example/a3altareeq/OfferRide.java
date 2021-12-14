@@ -21,7 +21,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -88,7 +87,7 @@ public class OfferRide extends FragmentActivity implements OnMapReadyCallback{
         ////////////////////////Input by User///////////////////
 
         //Date Picker
-        EditText datePickerFeild=findViewById(R.id.editRideDateOffer);
+        TextView datePickerFeild=findViewById(R.id.editRideDateOffer);
         datePickerFeild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +114,7 @@ public class OfferRide extends FragmentActivity implements OnMapReadyCallback{
         });
 
         //Time Picker
-        EditText timePickerFeild=findViewById(R.id.editRideTimeOffer);
+        TextView timePickerFeild=findViewById(R.id.editRideTimeOffer);
         timePickerFeild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,9 +141,9 @@ public class OfferRide extends FragmentActivity implements OnMapReadyCallback{
         });
 
         //Details for the offer
-        EditText seats=findViewById(R.id.editSeatsNumber);
-        EditText price=findViewById(R.id.editPriceOffered);
-        EditText offerNotes=findViewById(R.id.editRideNotes);
+        TextView seats=findViewById(R.id.editSeatsNumber);
+        TextView price=findViewById(R.id.editPriceOffered);
+        TextView offerNotes=findViewById(R.id.editRideNotes);
 
 
 
@@ -155,12 +154,12 @@ public class OfferRide extends FragmentActivity implements OnMapReadyCallback{
             @Override
             public void onClick(View v) {
 //
-                Toast.makeText(getApplicationContext(), "( " + mOrigin.latitude + "," + mOrigin.longitude + " )"
-                                + "( " + mDestination.latitude + "," + mDestination.longitude + " )"
-                                + " date: " + datePickerFeild.getText().toString() + "time: " + timePickerFeild.getText().toString()
-                                + "notes" + offerNotes.getText().toString() + "# Seats: " + seats.getText().toString()
-                                + "price: " + price.getText().toString()
-                        , Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "( " + mOrigin.latitude + "," + mOrigin.longitude + " )"
+//                                + "( " + mDestination.latitude + "," + mDestination.longitude + " )"
+//                                + " date: " + datePickerFeild.getText().toString() + "time: " + timePickerFeild.getText().toString()
+//                                + "notes" + offerNotes.getText().toString() + "# Seats: " + seats.getText().toString()
+//                                + "price: " + price.getText().toString()
+//                        , Toast.LENGTH_LONG).show();
 //                // save to dynamoDp
 
 
@@ -168,7 +167,7 @@ public class OfferRide extends FragmentActivity implements OnMapReadyCallback{
                 String id=sharedPreferences.getString("userId","id");
 
                 Ride ride = Ride.builder().driverName(Amplify.Auth.getCurrentUser().getUsername())
-                        .dateTime(datePickerFeild.getText().toString() + " , " + timePickerFeild.getText().toString())
+                        .dateTime(datePickerFeild.getText().toString() + " " + timePickerFeild.getText().toString())
                         .numberOfSeats(Integer.valueOf(seats.getText().toString())).price(price.getText().toString())
                         .latDrop(mDestination.latitude).latPick(mOrigin.latitude)
                         .lonDrop(mDestination.longitude).lonPick(mOrigin.longitude).note(offerNotes.getText().toString()).build();
