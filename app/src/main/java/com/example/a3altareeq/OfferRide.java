@@ -127,8 +127,12 @@ public class OfferRide extends FragmentActivity implements OnMapReadyCallback{
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
+
+                        mcurrentTime.set(Calendar.HOUR_OF_DAY,selectedHour);
+                        mcurrentTime.set(Calendar.MINUTE,selectedMinute);
                         String timeFormat = simpleDateFormat.format(mcurrentTime.getTime());
-                        timePickerFeild.setText( timeFormat);
+                        timePickerFeild.setText(timeFormat);
+
                     }
                 }, hour, minute, false);//Is 24 hour time
                 mTimePicker.setTitle("Select Time");
