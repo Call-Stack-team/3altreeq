@@ -111,6 +111,16 @@
                 app:layout_constraintVertical_bias="0.122"
                 tools:textStyle="bold" />
 
+            <Button
+                android:id="@+id/passenger"
+                android:layout_width="71dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="72dp"
+                android:layout_marginEnd="16dp"
+                android:text="provide passenger"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </FrameLayout>
