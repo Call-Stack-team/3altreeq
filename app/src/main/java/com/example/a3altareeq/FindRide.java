@@ -21,10 +21,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.core.model.query.Where;
+import com.amplifyframework.datastore.generated.model.User;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -66,8 +69,10 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_find_ride);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FindRide.this);
+        String userId=sharedPreferences.getString("userId","id");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -80,7 +85,7 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
         ////////////////////////Input by User///////////////////
 
         //Date Picker
-        EditText datePickerFeild = findViewById(R.id.editRideDateOffer);
+        TextView datePickerFeild = findViewById(R.id.editRideDateOffer);
         datePickerFeild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +112,7 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
         });
 
         //Time Picker
-        EditText timePickerField = findViewById(R.id.editRideTimeOffer);
+        TextView timePickerField = findViewById(R.id.editRideTimeOffer);
         timePickerField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,6 +145,25 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 Intent goRecyclerViewPage = new Intent(FindRide.this, RideList.class);
+                /*------------------ updatte user longitude and latitude-------------------------*/
+
+                Amplify.DataStore.query(User.class, Where.id(userId),
+                        matches -> {
+                            if (matches.hasNext()) {
+                                User original = matches.next();
+                                User edited = original.copyOfBuilder().pickupUserlat(mOrigin.latitude).pickupUserlon(mOrigin.longitude).dropUserlat(mDestination.latitude).dropUserlon(mDestination.longitude)
+                                        .build();
+                                Amplify.DataStore.save(edited,
+                                        updated -> System.out.println("updated"),
+                                        failure -> Log.e("MyAmplifyApp", "Update failed.", failure)
+                                );
+                            }
+                        },
+                        failure -> Log.e("MyAmplifyApp", "Query failed.", failure)
+                );
+
+                /*-------------------------------------------------------------------------------*/
+
 
                 goRecyclerViewPage.putExtra("pickPointLat",(float)  mOrigin.latitude);
                 goRecyclerViewPage.putExtra("pickPointLon", (float) mOrigin.longitude);
@@ -147,14 +171,14 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
                 goRecyclerViewPage.putExtra("dropPointLon", (float) mDestination.longitude);
                 goRecyclerViewPage.putExtra("date",datePickerFeild.getText().toString());
                 goRecyclerViewPage.putExtra("time", timePickerField.getText().toString());
-
+/*
                 Toast.makeText(getApplicationContext(), "( "+mOrigin.latitude +","+ mOrigin.longitude+" )"
                                 +"( "+mDestination.latitude +","+ mDestination.longitude+" )"
                                 +" date: "+datePickerFeild.getText().toString()+"time: "+timePickerField.getText().toString()
                         , Toast.LENGTH_LONG).show();
                 System.out.println( ""+"( "+mOrigin.latitude +","+ mOrigin.longitude+" )"
                         +"( "+mDestination.latitude +","+ mDestination.longitude+" )"
-                        +" date: "+datePickerFeild.getText().toString()+"time: "+timePickerField.getText().toString());
+                        +" date: "+datePickerFeild.getText().toString()+"time: "+timePickerField.getText().toString());*/
                 startActivity(goRecyclerViewPage);
             }
 
@@ -208,12 +232,12 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
 
                     //set the pick point
                     String pickPointAddress = getAddress(FindRide.this, mOrigin.latitude, mOrigin.longitude);
-                    EditText pickPoint = findViewById(R.id.enterPickUpPointOfferFinde);
+                    TextView pickPoint = findViewById(R.id.enterPickUpPointOfferFinde);
                     pickPoint.setText(pickPointAddress);
 
                     //set the drop point
                     String dropPointAddress = getAddress(FindRide.this, mDestination.latitude, mDestination.longitude);
-                    EditText dropPoint = findViewById(R.id.enterDropPointOfferFind);
+                    TextView dropPoint = findViewById(R.id.enterDropPointOfferFind);
                     dropPoint.setText(dropPointAddress);
 
                     //draw the path between to points

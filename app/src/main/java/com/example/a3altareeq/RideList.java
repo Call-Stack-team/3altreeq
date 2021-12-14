@@ -1,6 +1,7 @@
 package com.example.a3altareeq;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -26,6 +28,9 @@ import android.content.Context;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -41,6 +46,7 @@ public class RideList extends AppCompatActivity {
   }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected  void onResume() {
         super.onResume();
@@ -88,8 +94,19 @@ public class RideList extends AppCompatActivity {
                               if (!Amplify.Auth.getCurrentUser().getUsername().equals(ride.getDriverName())){
                                   if(!usersName.contains(Amplify.Auth.getCurrentUser().getUsername()))
                                   {
-                                      allRide.add(ride);
-                                                  }}}
+                                      if(usersName.size()-1<ride.getNumberOfSeats()){
+
+                                          /*-------*/
+                                          try {
+                                              if(isLaterThanNow(ride.getDateTime()))
+                                                  allRide.add(ride);
+                                          } catch (ParseException e) {
+                                              e.printStackTrace();
+                                          }
+                                          /*-------------*/
+
+//                                      allRide.add(ride);
+                                                  }}}}
                     }
                     handler.sendEmptyMessage(1);
                 },
@@ -117,6 +134,29 @@ public class RideList extends AppCompatActivity {
             // do your stuff
             return "address not defined";
         }
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public boolean isLaterThanNow(String dateTime) throws ParseException {
+        // convert String to LocalDateTime
+        LocalDateTime offerTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("d/MM/uuuu h:mm a", Locale.ENGLISH));
+
+        //print the dateTime in new format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss a");
+        System.out.println(offerTime.format(formatter));
+
+        LocalDateTime timeNow= LocalDateTime.now();
+        int compareValue = offerTime.compareTo(timeNow);
+
+        System.out.println("Compare value = " + compareValue);
+
+        if(compareValue > 0)
+        {
+            System.out.println("dateTimeOne is later than dateTimeTwo");
+            return true;
+        }
+        return false;
     }
 
 }
