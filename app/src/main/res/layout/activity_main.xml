@@ -31,11 +31,17 @@
                     android:id="@+id/topAppBar"
                     style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
+                    android:layout_height="55dp"
                     android:background="@android:color/transparent"
                     android:elevation="0dp"
                     app:navigationIcon="@drawable/ic_baseline_menu_24"
-                    app:title="@string/top_app_bar" />
+                    app:title="">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/logo" />
+                </com.google.android.material.appbar.MaterialToolbar>
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

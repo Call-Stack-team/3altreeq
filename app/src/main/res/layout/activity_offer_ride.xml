@@ -25,59 +25,61 @@
             android:id="@+id/enterDropPointOffer"
             android:layout_width="181dp"
             android:layout_height="23dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="48dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Drop Point"
+            android:textSize="16sp"
             map:layout_constraintBottom_toTopOf="@+id/enterPickUpPointOffer"
-            map:layout_constraintStart_toEndOf="@+id/dot2"
+            map:layout_constraintStart_toStartOf="@+id/dot2"
             map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintVertical_bias="0.951" />
+            map:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/enterPickUpPointOffer"
             android:layout_width="181dp"
             android:layout_height="23dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="48dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Pick Point"
+            android:textSize="16sp"
             map:layout_constraintBottom_toBottomOf="parent"
-            map:layout_constraintStart_toEndOf="@+id/dot2"
+            map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintVertical_bias="0.46" />
+            map:layout_constraintVertical_bias="0.447" />
 
         <TextView
             android:id="@+id/editRideDateOffer"
-            android:layout_width="177dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Choose Date"
-            android:textSize="20sp"
+            android:textSize="16sp"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintHorizontal_bias="0.243"
+            map:layout_constraintHorizontal_bias="0.158"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintVertical_bias="0.541" />
+            map:layout_constraintVertical_bias="0.539" />
 
         <TextView
             android:id="@+id/editRideTimeOffer"
-            android:layout_width="177dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Choose Date"
-            android:textSize="20sp"
+            android:textSize="16sp"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintHorizontal_bias="0.243"
+            map:layout_constraintHorizontal_bias="0.158"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintVertical_bias="0.617" />
+            map:layout_constraintVertical_bias="0.598" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/offerRideButton"
             android:layout_width="206dp"
             android:layout_height="57dp"
-            android:background="#F5B301"
+            android:background="@drawable/droppickbtn"
             android:text="Offer Ride"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
@@ -110,11 +112,12 @@
             android:id="@+id/editSeatsNumber"
             android:layout_width="85dp"
             android:layout_height="42dp"
-            android:layout_marginEnd="28dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginBottom="240dp"
             android:ems="10"
             android:hint="# Seats"
             android:inputType="textPersonName"
+            android:textSize="16sp"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintTop_toBottomOf="@+id/editPriceOffered"
@@ -123,15 +126,16 @@
         <EditText
             android:id="@+id/editPriceOffered"
             android:layout_width="85dp"
-            android:layout_height="42dp"
-            android:layout_marginEnd="28dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
             android:ems="10"
             android:hint="Price"
             android:inputType="textPersonName"
+            android:textSize="16sp"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintVertical_bias="0.529" />
+            map:layout_constraintVertical_bias="0.538" />
 
         <ImageView
             android:id="@+id/dot2"
@@ -140,10 +144,10 @@
             android:src="@drawable/dot"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintHorizontal_bias="0.011"
+            map:layout_constraintHorizontal_bias="0.0"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintVertical_bias="0.427" />
+            map:layout_constraintVertical_bias="0.428" />
 
         <ImageView
             android:id="@+id/calendaricon"
@@ -152,10 +156,10 @@
             android:src="@drawable/calendar"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toStartOf="@+id/editRideDateOffer"
-            map:layout_constraintHorizontal_bias="0.454"
+            map:layout_constraintHorizontal_bias="0.695"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintVertical_bias="0.529" />
+            map:layout_constraintVertical_bias="0.54" />
 
         <ImageView
             android:id="@+id/timeicon"
@@ -164,18 +168,19 @@
             android:src="@drawable/clock"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toStartOf="@+id/editRideTimeOffer"
+            map:layout_constraintHorizontal_bias="0.695"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintVertical_bias="0.605" />
+            map:layout_constraintVertical_bias="0.603" />
 
         <ImageView
             android:id="@+id/carseaticon"
             android:layout_width="27dp"
             android:layout_height="28dp"
-            android:src="@drawable/carseat"
+            android:src="@drawable/groupiconblack"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toStartOf="@+id/editSeatsNumber"
-            map:layout_constraintHorizontal_bias="0.981"
+            map:layout_constraintHorizontal_bias="0.979"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent"
             map:layout_constraintVertical_bias="0.602" />
@@ -187,10 +192,10 @@
             android:src="@drawable/dollar"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toStartOf="@+id/editPriceOffered"
-            map:layout_constraintHorizontal_bias="0.974"
+            map:layout_constraintHorizontal_bias="0.972"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintVertical_bias="0.525" />
+            map:layout_constraintVertical_bias="0.54" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
