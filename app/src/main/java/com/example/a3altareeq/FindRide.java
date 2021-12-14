@@ -120,10 +120,11 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
 
+                        mcurrentTime.set(Calendar.HOUR_OF_DAY,selectedHour);
+                        mcurrentTime.set(Calendar.MINUTE,selectedMinute);
                         String timeFormat = simpleDateFormat.format(mcurrentTime.getTime());
-                        Time=timeFormat;
-//                        timePickerField.setText(timeFormat);
-                        timePickerField.setText(String.format("%02d:%02d", selectedHour, selectedMinute));
+                        timePickerField.setText(timeFormat);
+
                     }
                 }, hour, minute, false);//Is 24 hour time
                 mTimePicker.setTitle("Select Time");
