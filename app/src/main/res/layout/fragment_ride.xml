@@ -2,151 +2,194 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/bac"
     android:layout_width="match_parent"
-    android:layout_height="200sp"
+    android:layout_height="170dp"
     tools:context=".RideFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10sp"
-        android:background="@drawable/ridelayoutbackground"
-        android:clipToPadding="false">
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
 
-        <TextView
-            android:id="@+id/testFragmint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|center_horizontal"
-            android:text="Rider Name"
-            android:textColor="#000000"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/taskCon"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@color/white"
+            android:padding="10dp">
 
-        <TextView
-            android:id="@+id/from"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="from"
-            android:textColor="#050000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.391" />
+            <ImageView
+                android:id="@+id/dot2list"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/dot"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/to"
-            android:layout_width="wrap_content"
-            android:layout_height="18dp"
-            android:layout_marginBottom="80dp"
-            android:text="to"
-            android:textColor="#050000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.096"
-            app:layout_constraintStart_toEndOf="@+id/from"
-            app:layout_constraintTop_toBottomOf="@+id/testFragmint"
-            app:layout_constraintVertical_bias="0.964" />
+            <TextView
+                android:id="@+id/testFragmint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center_horizontal"
+                android:text="Rider Name"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.057"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.008" />
 
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="23dp"
-            android:text="price"
-            android:textColor="#050000"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.016"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/to"
-            app:layout_constraintVertical_bias="0.555"
-            tools:textAlignment="center" />
+            <TextView
+                android:id="@+id/from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:text="Pick location"
+                android:textColor="#050000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.41" />
 
-        <Button
-            android:id="@+id/request"
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
-            android:text="Request"
-            android:textColor="#050000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.982"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.87" />
+            <TextView
+                android:id="@+id/to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Drop location"
+                android:textColor="#050000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.118"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.658" />
 
-        <TextView
-            android:id="@+id/numberOfSeat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="no passenger"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="56dp"
+                android:text="price"
+                android:textColor="#050000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.031"
+                tools:textAlignment="center" />
 
-        <!--        <androidx.cardview.widget.CardView-->
-        <!--            android:layout_width="389dp"-->
-        <!--            android:layout_height="197dp"-->
-        <!--            app:cardBackgroundColor="@color/white"-->
-        <!--            app:cardCornerRadius="20dp"-->
-        <!--            app:cardElevation="10dp"-->
-        <!--            app:cardMaxElevation="12dp"-->
-        <!--            app:cardPreventCornerOverlap="true"-->
-        <!--            app:cardUseCompatPadding="true"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintHorizontal_bias="0.0"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            app:layout_constraintVertical_bias="0.005">-->
+            <Button
+                android:id="@+id/request"
+                android:layout_width="104dp"
+                android:layout_height="35dp"
+                android:background="@drawable/ridelistbtn"
+                android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
+                android:gravity="center"
+                android:text="Request"
+                android:textColor="@color/white"
+                android:textSize="8sp"
 
-        <!--            <ImageView-->
-        <!--                android:id="@+id/img"-->
-        <!--                android:layout_width="88dp"-->
-        <!--                android:layout_height="78dp"-->
-        <!--                android:layout_gravity="fill"-->
-        <!--                android:layout_margin="10dp"-->
-        <!--                android:contentDescription="@string/app_name"-->
-        <!--                android:src="@drawable/ic_baseline_directions_car_24" />-->
+                app:backgroundTint="@null"
+                app:cornerRadius="100dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.849"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/numberOfSeat"
+                app:layout_constraintVertical_bias="0.205" />
 
-        <!--            -->
+            <TextView
+                android:id="@+id/numberOfSeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="no passenger"
+                android:textColor="#050000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.854"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.387" />
 
-        <!--            <TextView-->
-        <!--                android:id="@+id/from"-->
-        <!--                android:layout_width="107dp"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="center|center_horizontal"-->
-        <!--                android:layout_marginTop="20dp"-->
-        <!--                android:layout_marginBottom="20dp"-->
-        <!--                android:text="from"-->
-        <!--                android:textSize="20sp"-->
-        <!--                android:textStyle="italic" />-->
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="26dp"
+                android:layout_height="19dp"
+                android:src="@drawable/groupicon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/numberOfSeat"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.396" />
 
-        <!--            <TextView-->
-        <!--                android:id="@+id/to"-->
-        <!--                android:layout_width="113dp"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="right|center"-->
-        <!--                android:layout_marginTop="20dp"-->
-        <!--                android:layout_marginBottom="20dp"-->
-        <!--                android:text="to"-->
-        <!--                android:textSize="20sp"-->
-        <!--                android:textStyle="italic" />-->
+            <!--        <androidx.cardview.widget.CardView-->
+            <!--            android:layout_width="389dp"-->
+            <!--            android:layout_height="197dp"-->
+            <!--            app:cardBackgroundColor="@color/white"-->
+            <!--            app:cardCornerRadius="20dp"-->
+            <!--            app:cardElevation="10dp"-->
+            <!--            app:cardMaxElevation="12dp"-->
+            <!--            app:cardPreventCornerOverlap="true"-->
+            <!--            app:cardUseCompatPadding="true"-->
+            <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--            app:layout_constraintEnd_toEndOf="parent"-->
+            <!--            app:layout_constraintHorizontal_bias="0.0"-->
+            <!--            app:layout_constraintStart_toStartOf="parent"-->
+            <!--            app:layout_constraintTop_toTopOf="parent"-->
+            <!--            app:layout_constraintVertical_bias="0.005">-->
+
+            <!--            <ImageView-->
+            <!--                android:id="@+id/img"-->
+            <!--                android:layout_width="88dp"-->
+            <!--                android:layout_height="78dp"-->
+            <!--                android:layout_gravity="fill"-->
+            <!--                android:layout_margin="10dp"-->
+            <!--                android:contentDescription="@string/app_name"-->
+            <!--                android:src="@drawable/ic_baseline_directions_car_24" />-->
+
+            <!--            -->
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/from"-->
+            <!--                android:layout_width="107dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_gravity="center|center_horizontal"-->
+            <!--                android:layout_marginTop="20dp"-->
+            <!--                android:layout_marginBottom="20dp"-->
+            <!--                android:text="from"-->
+            <!--                android:textSize="20sp"-->
+            <!--                android:textStyle="italic" />-->
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/to"-->
+            <!--                android:layout_width="113dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_gravity="right|center"-->
+            <!--                android:layout_marginTop="20dp"-->
+            <!--                android:layout_marginBottom="20dp"-->
+            <!--                android:text="to"-->
+            <!--                android:textSize="20sp"-->
+            <!--                android:textStyle="italic" />-->
 
 
-        <!--        </androidx.cardview.widget.CardView>-->
+            <!--        </androidx.cardview.widget.CardView>-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>>
 </FrameLayout>
