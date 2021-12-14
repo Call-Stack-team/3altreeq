@@ -23,6 +23,10 @@ type User @model @key(name: "userByUserName", fields: ["userName"], queryField: 
   dateOfBirth: String
   Gender: String
   rides: [RideUser] @connection(keyName: "byUser", fields: ["id"])
+  pickupUserlon: Float
+  pickupUserlat: Float
+  dropUserlon: Float
+  dropUserlat: Float
 }
 
 type RideUser @model(queries: null) @key(name: "byRide", fields: ["rideID", "userID"]) @key(name: "byUser", fields: ["userID", "rideID"]) @auth(rules: [{allow: public}]) {
