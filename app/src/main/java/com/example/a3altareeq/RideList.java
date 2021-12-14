@@ -32,7 +32,6 @@ import java.util.Locale;
 
 public class RideList extends AppCompatActivity {
     String passengerCity;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +45,10 @@ public class RideList extends AppCompatActivity {
     protected  void onResume() {
         super.onResume();
 
-/*------------------passenger location---------------*/
+        /*------------------passenger location---------------*/
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RideList.this);
-        float pickPointLat=sharedPreferences.getFloat("pickPointLat",0);
-        float pickPointLon=sharedPreferences.getFloat("pickPointLon",0);
+        float pickPointLat=getIntent().getFloatExtra("pickPointLat",0);
+        float pickPointLon=getIntent().getFloatExtra("pickPointLon",0);
         Location locationPassenger=new Location("");
         passengerCity= getAddress(RideList.this,pickPointLat,pickPointLon);
         locationPassenger.setLatitude(pickPointLat);
@@ -75,6 +74,11 @@ public class RideList extends AppCompatActivity {
                 ModelQuery.list(Ride.class),
                 response -> {
                     for (Ride ride: response.getData()) {
+                        List<String> usersName=new ArrayList<>();
+                        for (RideUser ru:ride.getRideUsers()) {
+                            usersName.add(ru.getUser().getUserName());
+                            System.out.println(ru.getUser().getUserName());
+                        }
 
                           Location locationDriver=new Location("");
                           locationDriver.setLatitude(ride.getLatPick());
@@ -82,28 +86,15 @@ public class RideList extends AppCompatActivity {
 
                           if(locationPassenger.distanceTo(locationDriver)<10000){
                               if (!Amplify.Auth.getCurrentUser().getUsername().equals(ride.getDriverName())){
+                                  if(!usersName.contains(Amplify.Auth.getCurrentUser().getUsername()))
+                                  {
                                       allRide.add(ride);
-                                                  }}
+                                                  }}}
                     }
                     handler.sendEmptyMessage(1);
                 },
                 error -> Log.e("TaskMaster", error.toString(), error)
         );
-        /*-------------------------------------------------------------------------------------------------*/
-
-//        Amplify.API.query(ModelQuery.list(User.class),
-//                response ->{
-//                    for (User userA:response.getData()) {
-//                        for (RideUser rideUser :userA.getRides()) {
-//                        allRide.add(rideUser.getRide());
-//                        }
-//                    }
-//
-//                    handler.sendEmptyMessage(1);
-//                },
-//                error->Log.e("tareq",error.toString(),error)
-//        );
-        /*----------------------------------------------------------------------------------------------------*/
 
         recyclerView.setLayoutManager(new LinearLayoutManager(RideList.this));
         recyclerView.setAdapter(new RideAdapter(allRide));
