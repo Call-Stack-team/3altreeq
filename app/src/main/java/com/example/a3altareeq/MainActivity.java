@@ -7,11 +7,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amplifyframework.AmplifyException;
@@ -202,25 +205,54 @@ public class MainActivity extends AppCompatActivity {
 //    }
 //});
 
+
+
 /*------------------------send auth user id to user ride page--------------------------------- */
         Amplify.API.query(
                 ModelQuery.list(User.class, User.USER_NAME.contains(Amplify.Auth.getCurrentUser().getUsername())),
                 response -> {
                     for (User u : response.getData()) {
                         user=u;
+
                     }
+                    System.out.println("************************************"+user.getUserName());
+
+//
                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
                     sharedPreferences.edit().putString("userId",user.getId()).apply();
+                    sharedPreferences.edit().putString("userSide",user.getUserName()).apply();
+                    sharedPreferences.edit().putString("PhoneSide",user.getPhoneNumber()).apply();
+
+                    /*-----------send user name and phone number to sidebar page------------- */
+                    new Handler(Looper.getMainLooper()).post(new Runnable(){
+                        @Override
+                        public void run() {
+                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                            String userName = sharedPreferences.getString("userSide","No User");
+                            System.out.println(userName);
+                            String phoneNumber = sharedPreferences.getString("PhoneSide","No User");
+                            TextView sideDriverName = findViewById(R.id.sidebarName);
+                            TextView sideDriverPhone = findViewById(R.id.sidebarPhone);
+                            sideDriverName.setText(userName);
+                            sideDriverPhone.setText(phoneNumber);
+                        }
+                    });
+                    /*----------------------------------------------------------- */
+
                 },
                 error -> Log.e("MyAmplifyApp", "Query failure", error)
         );
 
         /*-----------------------------------------------------------------------------------------*/
 
+
+
     }
+
     @Override
     protected void onResume() {
         super.onResume();
     }
 
 }
+
