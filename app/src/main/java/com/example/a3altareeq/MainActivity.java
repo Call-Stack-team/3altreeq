@@ -1,11 +1,15 @@
 package com.example.a3altareeq;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
+import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
+import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -17,23 +21,87 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amplifyframework.AmplifyException;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.amplifyframework.api.graphql.model.ModelQuery;
-import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.User;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback{
     User user;
+    ArrayList<LatLng> mMarkerPoints;
+
+    //
+    private GoogleMap mMap;
+    private LatLng mOrigin;
+    private LatLng mDestination;
+    private Polyline mPolyline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ///////////////////////////////
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+
+        mapFragment.getMapAsync(this);
+
+        mMarkerPoints = new ArrayList<>();
+
+        Button find=findViewById(R.id.findride);
+        find.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goOfferd= new Intent(MainActivity.this, FindRide.class);
+                startActivity(goOfferd);
+            }
+        });
+
+        Button start=findViewById(R.id.startride);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goOfstart= new Intent(MainActivity.this, OfferRide.class);
+                startActivity(goOfstart);
+            }
+        });
+
+        //////////////////////////////////
 
         Amplify.Auth.fetchAuthSession(
                 result -> Log.i("AmplifyQuickstart", result.toString()),
@@ -87,22 +155,23 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this,OfferRide.class));
                 }else if (itemId == R.id.item8) {
                     System.out.println("alert");
-                    new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE)
-                            .setTitleText("Are you sure?")
-                            .setContentText("Won't be able to recover this file!")
-                            .setConfirmText("Yes,delete it!")
-                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sDialog) {
-                                    sDialog
-                                            .setTitleText("Deleted!")
-                                            .setContentText("Your imaginary file has been deleted!")
-                                            .setConfirmText("OK")
-                                            .setConfirmClickListener(null)
-                                            .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-                                }
-                            })
-                            .show();
+                    startActivity(new Intent(MainActivity.this,Account.class));
+//                    new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE)
+//                            .setTitleText("Are you sure?")
+//                            .setContentText("Won't be able to recover this file!")
+//                            .setConfirmText("Yes,delete it!")
+//                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                                @Override
+//                                public void onClick(SweetAlertDialog sDialog) {
+//                                    sDialog
+//                                            .setTitleText("Deleted!")
+//                                            .setContentText("Your imaginary file has been deleted!")
+//                                            .setConfirmText("OK")
+//                                            .setConfirmClickListener(null)
+//                                            .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+//                                }
+//                            })
+//                            .show();
 
                 }
 
@@ -114,97 +183,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
-
-//        Button login = findViewById(R.id.logBut);
-//        login.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(MainActivity.this,Register.class));
-//            }
-//        });
-//Button in=findViewById(R.id.button2);
-//in.setOnClickListener(new View.OnClickListener() {
-//    @Override
-//    public void onClick(View view) {
-//        startActivity(new Intent(MainActivity.this,Login.class));
-//    }
-//});
-//
-//Button signOut=findViewById(R.id.signout);
-//
-//signOut.setOnClickListener(new View.OnClickListener() {
-//    @Override
-//    public void onClick(View view) {
-//
-//        Amplify.Auth.signOut(
-//                () -> {Log.i("AuthQuickstart", "Signed out successfully");
-//                    Intent goToSignIn = new Intent(MainActivity.this, Login.class);
-//                    startActivity(goToSignIn);
-//                },
-//                error -> Log.e("AuthQuickstart", error.toString())
-//        );
-//    }
-//});
-//
-//Button userRidesButton=findViewById(R.id.userRideButtonMain);
-//userRidesButton.setOnClickListener(new View.OnClickListener() {
-//    @Override
-//    public void onClick(View view) {
-//        startActivity(new Intent(MainActivity.this,UserRides.class));
-//    }
-//});
-
-//Button rideLsit=findViewById(R.id.rideList);
-//        rideLsit.setOnClickListener(new View.OnClickListener() {
-//    @Override
-//    public void onClick(View view) {
-//        startActivity(new Intent(MainActivity.this,RideList.class));
-//    }
-//});
-//
-//Button findRide=findViewById(R.id.findRide);
-//        findRide.setOnClickListener(new View.OnClickListener() {
-//    @Override
-//    public void onClick(View view) {
-//        startActivity(new Intent(MainActivity.this,FindRide.class));
-//    }
-//});
-//
-//        Button offerRide=findViewById(R.id.offerRide);
-//        offerRide.setOnClickListener(new View.OnClickListener() {
-//    @Override
-//    public void onClick(View view) {
-//        startActivity(new Intent(MainActivity.this,OfferRide.class));
-//    }
-//});
-//        Button alert=findViewById(R.id.alert);
-//        alert.setOnClickListener(new View.OnClickListener() {
-//    @Override
-//    public void onClick(View view) {
-//
-////        new SweetAlertDialog(MainActivity.this)
-////                .setTitleText("Here's a message!")
-////                .show();
-//        new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE)
-//                .setTitleText("Are you sure?")
-//                .setContentText("Won't be able to recover this file!")
-//                .setConfirmText("Yes,delete it!")
-//                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-//                    @Override
-//                    public void onClick(SweetAlertDialog sDialog) {
-//                        sDialog
-//                                .setTitleText("Deleted!")
-//                                .setContentText("Your imaginary file has been deleted!")
-//                                .setConfirmText("OK")
-//                                .setConfirmClickListener(null)
-//                                .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-//                    }
-//                })
-//                .show();
-//
-//    }
-//});
-
 
 
 /*------------------------send auth user id to user ride page--------------------------------- */
@@ -246,13 +224,36 @@ public class MainActivity extends AppCompatActivity {
         /*-----------------------------------------------------------------------------------------*/
 
 
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
     }
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        mMap = googleMap;
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        zoomCountryLevel("Jordan");
+
+    }
+    //make the map zoomed on Jordan at starting of activity
+    public void zoomCountryLevel(String countryName){
+        try {
+            List<Address> address = new Geocoder(this).getFromLocationName(countryName, 1);
+            if (address == null) {
+                Log.e(TAG, "Not found");
+            } else {
+                Address loc = address.get(0);
+                Log.e(TAG, loc.getLatitude() + " " + loc.getLongitude());
+                LatLng pos = new LatLng(loc.getLatitude(), loc.getLongitude());
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 8));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
 
