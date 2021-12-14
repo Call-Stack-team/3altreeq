@@ -122,8 +122,8 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
 
                         String timeFormat = simpleDateFormat.format(mcurrentTime.getTime());
                         Time=timeFormat;
-                        timePickerField.setText(timeFormat);
-                        timePickerField.setText(selectedHour+ ":" + selectedMinute);
+//                        timePickerField.setText(timeFormat);
+                        timePickerField.setText(String.format("%02d:%02d", selectedHour, selectedMinute));
                     }
                 }, hour, minute, false);//Is 24 hour time
                 mTimePicker.setTitle("Select Time");
@@ -138,18 +138,15 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
         findRide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent goRecyclerViewPage = new Intent(FindRide.this, RideList.class);
 
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(FindRide.this);
-                SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
-//
-                sharedPreferencesEditor.putFloat("pickPointLat",(float)  mOrigin.latitude);
-                sharedPreferencesEditor.putFloat("pickPointLon", (float) mOrigin.longitude);
-                sharedPreferencesEditor.putFloat("dropPointLat", (float) mDestination.latitude);
-                sharedPreferencesEditor.putFloat("dropPointLon", (float) mDestination.longitude);
+                goRecyclerViewPage.putExtra("pickPointLat",(float)  mOrigin.latitude);
+                goRecyclerViewPage.putExtra("pickPointLon", (float) mOrigin.longitude);
+                goRecyclerViewPage.putExtra("dropPointLat", (float) mDestination.latitude);
+                goRecyclerViewPage.putExtra("dropPointLon", (float) mDestination.longitude);
+                goRecyclerViewPage.putExtra("date",datePickerFeild.getText().toString());
+                goRecyclerViewPage.putExtra("time", timePickerField.getText().toString());
 
-                sharedPreferencesEditor.putString("date",datePickerFeild.getText().toString() );
-                sharedPreferencesEditor.putString("time", timePickerField.getText().toString());
-                sharedPreferencesEditor.apply();
                 Toast.makeText(getApplicationContext(), "( "+mOrigin.latitude +","+ mOrigin.longitude+" )"
                                 +"( "+mDestination.latitude +","+ mDestination.longitude+" )"
                                 +" date: "+datePickerFeild.getText().toString()+"time: "+timePickerField.getText().toString()
@@ -157,7 +154,6 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
                 System.out.println( ""+"( "+mOrigin.latitude +","+ mOrigin.longitude+" )"
                         +"( "+mDestination.latitude +","+ mDestination.longitude+" )"
                         +" date: "+datePickerFeild.getText().toString()+"time: "+timePickerField.getText().toString());
-                Intent goRecyclerViewPage = new Intent(FindRide.this, RideList.class);
                 startActivity(goRecyclerViewPage);
             }
 
@@ -211,12 +207,12 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
 
                     //set the pick point
                     String pickPointAddress = getAddress(FindRide.this, mOrigin.latitude, mOrigin.longitude);
-                    EditText pickPoint = findViewById(R.id.enterPickUpPointOffer);
+                    EditText pickPoint = findViewById(R.id.enterPickUpPointOfferFinde);
                     pickPoint.setText(pickPointAddress);
 
                     //set the drop point
                     String dropPointAddress = getAddress(FindRide.this, mDestination.latitude, mDestination.longitude);
-                    EditText dropPoint = findViewById(R.id.enterDropPointOffer);
+                    EditText dropPoint = findViewById(R.id.enterDropPointOfferFind);
                     dropPoint.setText(dropPointAddress);
 
                     //draw the path between to points
