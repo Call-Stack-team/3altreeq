@@ -67,6 +67,7 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
                     goToRideDetails.putExtra("driverPhoneNumber",u.getPhoneNumber());
                     goToRideDetails.putExtra("driverFirstName",u.getFirstName());
                     goToRideDetails.putExtra("driverLastName",u.getLastName());
+
                     },
                 error -> Log.e("MyAmplifyApp", "Query failure", error)
         );
@@ -97,6 +98,7 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
                 goToRideDetails.putExtra("namee",holder.ride.getDriverName());
                 goToRideDetails.putExtra("lonto",holder.ride.getLonDrop());
                 goToRideDetails.putExtra("latto",holder.ride.getLatDrop());
+                goToRideDetails.putExtra("dateTime",holder.ride.getDateTime());
 //                Log.i("dfghjkjhgfghjkhg",holder.ride.getRideUsers().get(1).getUser()+"");
                 view.getContext().startActivity(goToRideDetails);
             }

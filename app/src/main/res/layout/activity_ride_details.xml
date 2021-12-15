@@ -7,6 +7,17 @@
     android:background="@color/white"
     tools:context=".RideDetails">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toStartOf="@+id/profilePhone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.843"
+        app:srcCompat="@drawable/ic_baseline_black_phone" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -218,12 +229,35 @@
         android:id="@+id/profilePhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="24dp"
         android:text="Phone Namber"
         android:textColor="@color/black2"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileName" />
+
+    <TextView
+        android:id="@+id/dateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="56dp"
+        android:text="Date and Time"
+        android:textColor="@color/black2"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileName" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="24dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="248dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toStartOf="@+id/dateTime"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/calendar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
