@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Ride;
@@ -25,37 +24,37 @@ import com.amplifyframework.datastore.generated.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
-public class UserRides extends AppCompatActivity {
-     List<Ride> allUserRides = new ArrayList<>();
+public class UserRideBooked extends AppCompatActivity {
+    List<Ride> allUserRides = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_rides);
-        Button booked=findViewById(R.id.offered_btn);
+        setContentView(R.layout.activity_user_ride_booked);
+        Button booked=findViewById(R.id.bookUser_btn);
         booked.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                startActivity(new Intent(UserRides.this,UserRideBooked.class));
+                startActivity(new Intent(UserRideBooked.this,UserRides.class));
             }
-        });
 
+        });
+//        Button passengerBtn=findViewById(R.id.passenger);
+//        passengerBtn.setVisibility(View.INVISIBLE);
     }
 
     @Override
-   protected void onResume() {
+    protected void onResume() {
         super.onResume();
         /* ------------------------------get auth user id from  main---------------*/
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(UserRides.this);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(UserRideBooked.this);
         String id=sharedPreferences.getString("userId","id");
 
-/*---------------------get and provide user rides---------------------------------*/
+        /*---------------------get and provide user rides---------------------------------*/
 
-        RecyclerView recyclerView = findViewById(R.id.allUserRides);
+        RecyclerView recyclerView = findViewById(R.id.bookedRides);
         Handler handler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
 
             @Override
@@ -67,15 +66,15 @@ public class UserRides extends AppCompatActivity {
         Amplify.API.query(ModelQuery.get(User.class,id),
                 response ->{
                     for (RideUser rideUser :response.getData().getRides()) {
-                        if(!rideUser.getRide().getDriverName().equals(Amplify.Auth.getCurrentUser().getUsername())) {
+                        if(rideUser.getRide().getDriverName().equals(Amplify.Auth.getCurrentUser().getUsername())) {
                             allUserRides.add(rideUser.getRide());
                         }
                     }
                     handler.sendEmptyMessage(1);
                 },
-                error->Log.e("tareq",error.toString(),error)
+                error-> Log.e("tareq",error.toString(),error)
         );
-        recyclerView.setLayoutManager(new LinearLayoutManager(UserRides.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(UserRideBooked.this));
         recyclerView.setAdapter(new UserRidesAdapter(allUserRides));
 
         /*---------------------------------------------------------------------------------*/
