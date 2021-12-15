@@ -25,9 +25,12 @@
                 android:id="@+id/firstNameInPassFrag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:text="first name"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="First name"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,9 +38,12 @@
                 android:id="@+id/lastNamePassengerFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:text="last name"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Last name"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/firstNameInPassFrag"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,9 +52,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="52dp"
+                android:layout_marginTop="8dp"
                 android:text="phonenumber"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="#050000"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/firstNameInPassFrag" />
 
@@ -56,31 +64,58 @@
                 android:id="@+id/pickUpPassengerFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="36dp"
-                android:text="pickUp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="48dp"
+                android:text="Check Pickup"
+                android:textColor="#050000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView11" />
 
             <TextView
                 android:id="@+id/dropOffPassengerFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:layout_marginEnd="20dp"
-                android:text="drop off"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pickUpPassengerFragment" />
+                android:layout_marginStart="8dp"
+                android:text="Check Drop off"
+                android:textColor="#050000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imageView12"
+                tools:layout_editor_absoluteY="122dp" />
 
             <Button
                 android:id="@+id/deletePassenger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="decline request"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="decline"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/dropOffPassengerFragment"
-                app:layout_constraintStart_toEndOf="@+id/phoneNumberPassengerFragment" />
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/ic_baseline_add_location_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phoneNumberPassengerFragment" />
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:src="@drawable/ic_baseline_add_location_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView11"
+                app:layout_constraintVertical_bias="0.36" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </FrameLayout>
