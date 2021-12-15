@@ -81,5 +81,9 @@ public class UserRideBooked extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,MainActivity.class));
+        super.onBackPressed();
+    }
 }
