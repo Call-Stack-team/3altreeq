@@ -81,7 +81,7 @@ public class UserRidesAdapter extends RecyclerView.Adapter<UserRidesAdapter.User
 
         driverName.setText(holder.ride.getDriverName());
         dateTime.setText(holder.ride.getDateTime());
-        price.setText(holder.ride.getPrice());
+        price.setText(holder.ride.getPrice()+"JD");
         String pickLocation=getAddress(holder.itemView.getContext(),holder.ride.getLatPick(),holder.ride.getLonPick());
         String dropLocation=getAddress(holder.itemView.getContext(),holder.ride.getLatDrop(),holder.ride.getLonDrop());
         pickPoint.setText(pickLocation);

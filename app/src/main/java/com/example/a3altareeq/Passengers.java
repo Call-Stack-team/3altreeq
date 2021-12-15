@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
@@ -69,5 +70,9 @@ public class Passengers extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(Passengers.this));
         recyclerView.setAdapter(new PassengerAdapter(allPassenger));
     }
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,MainActivity.class));
+        super.onBackPressed();
+    }
 }
