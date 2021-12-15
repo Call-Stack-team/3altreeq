@@ -1,7 +1,10 @@
 package com.example.a3altareeq;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +23,11 @@ import com.amplifyframework.datastore.generated.model.RideUser;
 import com.amplifyframework.datastore.generated.model.User;
 import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -70,10 +75,17 @@ public class UserRidesAdapter extends RecyclerView.Adapter<UserRidesAdapter.User
         TextView driverName = holder.itemView.findViewById(R.id.driverNameInUserRidesFragment);
         TextView dateTime = holder.itemView.findViewById(R.id.timeinUserRidesFragment);
         TextView price = holder.itemView.findViewById(R.id.priceInUserRidesFragment);
+        TextView pickPoint=holder.itemView.findViewById(R.id.pickInUserRidesFragment);
+        TextView dropPoint=holder.itemView.findViewById(R.id.dropInUserRidesFragment);
 
         driverName.setText(holder.ride.getDriverName());
         dateTime.setText(holder.ride.getDateTime());
         price.setText(holder.ride.getPrice());
+        String pickLocation=getAddress(holder.itemView.getContext(),holder.ride.getLatPick(),holder.ride.getLonPick());
+        String dropLocation=getAddress(holder.itemView.getContext(),holder.ride.getLatDrop(),holder.ride.getLonDrop());
+        pickPoint.setText(pickLocation);
+        dropPoint.setText(dropLocation);
+
 
         viewPassenger.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,5 +111,22 @@ public class UserRidesAdapter extends RecyclerView.Adapter<UserRidesAdapter.User
 
     public void setAllUserRides(List<Ride> allUserRides) {
         this.allUserRides = allUserRides;
+    }
+
+    public String getAddress(Context context, double pickPointLat, double pickPointLon) {
+        Geocoder gcd = new Geocoder(context, Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = gcd.getFromLocation(pickPointLat, pickPointLon, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (addresses.size() > 0) {
+            return addresses.get(0).getLocality();
+        }
+        else {
+            // do your stuff
+            return "address not defined";
+        }
     }
 }
