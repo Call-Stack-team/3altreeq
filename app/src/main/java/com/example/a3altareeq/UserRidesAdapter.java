@@ -53,22 +53,24 @@ public class UserRidesAdapter extends RecyclerView.Adapter<UserRidesAdapter.User
     @Override
     public void onBindViewHolder(@NonNull UserRidesViewHolder holder, int position) {
         holder.ride=allUserRides.get(position);
-        Set<String> passengers=new HashSet<>();
+//        Set<String> passengers=new HashSet<>();
+        Button viewPassenger=holder.itemView.findViewById(R.id.passenger);
 
         Amplify.API.query(ModelQuery.get(Ride.class,holder.ride.getId()),
                 response->{
             for (RideUser ru:response.getData().getRideUsers()){
-                 passengers.add(ru.getUser().getFirstName()+" "+ru.getUser().getLastName()+" "+ru.getUser().getPhoneNumber());
-                System.out.println(ru.getUser().getFirstName()+" "+ru.getUser().getLastName()+" "+ru.getUser().getPhoneNumber());
+                if (!ru.getRide().getDriverName().equals(Amplify.Auth.getCurrentUser().getUsername())){
+                    viewPassenger.setVisibility(View.INVISIBLE);
+                }
+//                 passengers.add(ru.getUser().getFirstName()+" "+ru.getUser().getLastName()+" "+ru.getUser().getPhoneNumber());
 
             }
-
-                },e-> Log.e("aaa",e.getMessage())
+            },e-> Log.e("aaa",e.getMessage())
                 );
         TextView driverName = holder.itemView.findViewById(R.id.driverNameInUserRidesFragment);
         TextView dateTime = holder.itemView.findViewById(R.id.timeinUserRidesFragment);
         TextView price = holder.itemView.findViewById(R.id.priceInUserRidesFragment);
-        Button viewPassenger=holder.itemView.findViewById(R.id.passenger);
+
         driverName.setText(holder.ride.getDriverName());
         dateTime.setText(holder.ride.getDateTime());
         price.setText(holder.ride.getPrice());
@@ -82,6 +84,8 @@ public class UserRidesAdapter extends RecyclerView.Adapter<UserRidesAdapter.User
             }
 
         });
+
+
     }
 
     @Override

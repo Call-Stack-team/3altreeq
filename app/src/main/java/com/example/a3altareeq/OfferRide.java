@@ -62,11 +62,7 @@ public class OfferRide extends FragmentActivity implements OnMapReadyCallback{
     private LatLng mOrigin;
     private LatLng mDestination;
     private Polyline mPolyline;
-    //    private String offerPickPoint;
-//    private String offerDropPoint;
-//    private String offerDate;
-//    private String offerTime;
-//    private String offerNotes;
+
     ArrayList<LatLng> mMarkerPoints;
 
     @Override
@@ -153,14 +149,6 @@ public class OfferRide extends FragmentActivity implements OnMapReadyCallback{
         offerRide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//
-//                Toast.makeText(getApplicationContext(), "( " + mOrigin.latitude + "," + mOrigin.longitude + " )"
-//                                + "( " + mDestination.latitude + "," + mDestination.longitude + " )"
-//                                + " date: " + datePickerFeild.getText().toString() + "time: " + timePickerFeild.getText().toString()
-//                                + "notes" + offerNotes.getText().toString() + "# Seats: " + seats.getText().toString()
-//                                + "price: " + price.getText().toString()
-//                        , Toast.LENGTH_LONG).show();
-//                // save to dynamoDp
 
 
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(OfferRide.this);
@@ -193,7 +181,7 @@ public class OfferRide extends FragmentActivity implements OnMapReadyCallback{
 
 
                                         Log.i("MyAmplifyApp", "Added user with id: " + response.getData().getId());
-                                        Intent goOfferdList = new Intent(OfferRide.this, RideList.class);
+                                        Intent goOfferdList = new Intent(OfferRide.this, UserRideBooked.class);
                                         startActivity(goOfferdList);
                                     },
                                     error -> Log.e("MyAmplifyApp", "Create failed", error)
@@ -204,47 +192,12 @@ public class OfferRide extends FragmentActivity implements OnMapReadyCallback{
 
 
 
-//                                list(User.class),
-//                        response -> {
-//                            for (User userlist : response.getData()) {
-//                                if (userlist.getUserName() == Amplify.Auth.getCurrentUser().getUsername()) {
-//                                    user = userlist;
-//                                }
-//                            }
-
-//                            RideUser rideUser = RideUser.builder().ride(ride).user(user).build();
-//                            ride.getRideUsers().add(rideUser);
-//                        },
-//                        error -> Log.e("MyAmplifyApp", "Query failure", error)
-//                );
-
-
-
 
                 Log.i("AuthQuickStart", "Result:  ");
             }
         });
 
 
-
-
-//                Ride ride = Ride.builder()..build();
-//                Amplify.API.mutate(
-//                        ModelMutation.create(ride),
-//                        response -> {
-//                            Log.i("MyAmplifyApp", "Added user with id: " + response2.getData().getId());
-//                            Intent goOfferdList = new Intent(offerdList.this, OfferRide.class);
-//                            startActivity(goOfferdList);
-//                        },
-//                        error -> Log.e("MyAmplifyApp", "Create failed", error)
-//                );
-//                Log.i("AuthQuickStart", "Result: " + result.toString());
-//            }
-//        Intent goOfferedRidesListPage = new Intent(OfferRide.this, Offered.class);
-//                startActivity(goOfferedRidesListPage);
-//            }
-//
-//        });
     }
 
     @Override

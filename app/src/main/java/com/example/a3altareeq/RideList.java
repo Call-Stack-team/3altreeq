@@ -97,15 +97,15 @@ public class RideList extends AppCompatActivity {
                                       if(usersName.size()-1<ride.getNumberOfSeats()){
 
                                           /*-------*/
-                                          try {
-                                              if(isLaterThanNow(ride.getDateTime()))
-                                                  allRide.add(ride);
-                                          } catch (ParseException e) {
-                                              e.printStackTrace();
-                                          }
+//                                          try {
+//                                              if(isLaterThanNow(ride.getDateTime()))
+//                                                  allRide.add(ride);
+//                                          } catch (ParseException e) {
+//                                              e.printStackTrace();
+//                                          }
                                           /*-------------*/
 
-//                                      allRide.add(ride);
+                                      allRide.add(ride);
                                                   }}}}
                     }
                     handler.sendEmptyMessage(1);
@@ -137,26 +137,26 @@ public class RideList extends AppCompatActivity {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public boolean isLaterThanNow(String dateTime) throws ParseException {
-        // convert String to LocalDateTime
-        LocalDateTime offerTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("d/MM/uuuu h:mm a", Locale.ENGLISH));
-
-        //print the dateTime in new format
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss a");
-        System.out.println(offerTime.format(formatter));
-
-        LocalDateTime timeNow= LocalDateTime.now();
-        int compareValue = offerTime.compareTo(timeNow);
-
-        System.out.println("Compare value = " + compareValue);
-
-        if(compareValue > 0)
-        {
-            System.out.println("dateTimeOne is later than dateTimeTwo");
-            return true;
-        }
-        return false;
-    }
+//    @RequiresApi(api = Build.VERSION_CODES.O)
+//    public boolean isLaterThanNow(String dateTime) throws ParseException {
+//        // convert String to LocalDateTime
+//        LocalDateTime offerTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("d/MM/uuuu h:mm a", Locale.ENGLISH));
+//
+//        //print the dateTime in new format
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss a");
+//        System.out.println(offerTime.format(formatter));
+//
+//        LocalDateTime timeNow= LocalDateTime.now();
+//        int compareValue = offerTime.compareTo(timeNow);
+//
+//        System.out.println("Compare value = " + compareValue);
+//
+//        if(compareValue > 0)
+//        {
+//            System.out.println("dateTimeOne is later than dateTimeTwo");
+//            return true;
+//        }
+//        return false;
+//    }
 
 }
