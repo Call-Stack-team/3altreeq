@@ -55,16 +55,19 @@ public class RideDetails extends AppCompatActivity {
         String phoneDriver=getIntent().getStringExtra("driverPhoneNumber");
         String firstNameDriver=getIntent().getStringExtra("driverFirstName");
         String lastNameDriver=getIntent().getStringExtra("driverLastName");
+        String date=getIntent().getStringExtra("dateTime");
 
         TextView driverName = findViewById(R.id.profileName);
         TextView phoneNumber=findViewById(R.id.profilePhone);
         TextView pickLocation=findViewById(R.id.pickLocationView);
         TextView dropLocation=findViewById(R.id.dropLocationView);
         TextView notes=findViewById(R.id.noteView);
+        TextView dateTime =findViewById(R.id.dateTime);
 
         driverName.setText(firstNameDriver+" "+lastNameDriver);
         phoneNumber.setText(phoneDriver);
         notes.setText(note);
+        dateTime.setText(date);
 
         pickLocation.setOnClickListener(new View.OnClickListener() {
             @Override
