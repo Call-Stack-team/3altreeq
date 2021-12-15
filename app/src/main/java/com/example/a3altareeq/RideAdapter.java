@@ -82,7 +82,7 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
         riderName.setText(holder.ride.getDriverName());
         from.setText(getAddress(holder.itemView.getContext(),holder.ride.getLatPick(),holder.ride.getLonPick()));
         to.setText(getAddress(holder.itemView.getContext(),holder.ride.getLatDrop(),holder.ride.getLonDrop()));
-        price.setText(holder.ride.getPrice());
+        price.setText(holder.ride.getPrice()+"JD");
         numberOfSeat.setText(holder.ride.getRideUsers().size()-1+"/"+holder.ride.getNumberOfSeats());
 
         Button button=holder.itemView.findViewById(R.id.request);
