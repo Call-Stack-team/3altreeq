@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     startActivity(new Intent(MainActivity.this,OfferRide.class));
                 }else if (itemId == R.id.item8) {
                     System.out.println("account");
-                    startActivity(new Intent(MainActivity.this,Account.class));
+                    startActivity(new Intent(MainActivity.this,AccountShow.class));
 //                    new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE)
 //                            .setTitleText("Are you sure?")
 //                            .setContentText("Won't be able to recover this file!")
