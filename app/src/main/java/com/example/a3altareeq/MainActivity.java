@@ -144,9 +144,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }else if (itemId == R.id.item4) {
                     System.out.println("user ride");
                     startActivity(new Intent(MainActivity.this,UserRides.class));
-                } else if (itemId == R.id.item5) {
-                    System.out.println("ride list");
-                    startActivity(new Intent(MainActivity.this,RideList.class));
                 }else if (itemId == R.id.item6) {
                     System.out.println("find Ride");
                     startActivity(new Intent(MainActivity.this,FindRide.class));
@@ -154,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     System.out.println("offer ride");
                     startActivity(new Intent(MainActivity.this,OfferRide.class));
                 }else if (itemId == R.id.item8) {
-                    System.out.println("alert");
+                    System.out.println("account");
                     startActivity(new Intent(MainActivity.this,Account.class));
 //                    new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE)
 //                            .setTitleText("Are you sure?")
