@@ -479,5 +479,9 @@ public class FindRide extends FragmentActivity implements OnMapReadyCallback {
                 Toast.makeText(getApplicationContext(), "No route is found", Toast.LENGTH_LONG).show();
         }
     }
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,MainActivity.class));
+        super.onBackPressed();
+    }
 }
