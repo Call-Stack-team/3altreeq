@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -59,7 +60,7 @@ public class UserRidesAdapter extends RecyclerView.Adapter<UserRidesAdapter.User
     public void onBindViewHolder(@NonNull UserRidesViewHolder holder, int position) {
         holder.ride=allUserRides.get(position);
 //        Set<String> passengers=new HashSet<>();
-        Button viewPassenger=holder.itemView.findViewById(R.id.passenger);
+        ImageView viewPassenger=holder.itemView.findViewById(R.id.passenger);
 
         Amplify.API.query(ModelQuery.get(Ride.class,holder.ride.getId()),
                 response->{
